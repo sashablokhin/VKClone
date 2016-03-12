@@ -67,7 +67,7 @@
                                             <constraint firstAttribute="width" secondItem="iu3-1B-LXc" secondAttribute="height" multiplier="1:1" id="q8Y-9r-4Nx"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qAx-ZV-NLg">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qAx-ZV-NLg">
                                         <rect key="frame" x="0.0" y="315" width="320" height="95"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="wb4-B0-f5f">
@@ -87,14 +87,16 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iRg-Xp-4UP">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iRg-Xp-4UP">
                                                         <rect key="frame" x="0.0" y="55" width="280" height="40"/>
                                                         <color key="backgroundColor" red="0.30980392159999998" green="0.46666666670000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="xbE-cp-tAw"/>
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" title="Войти через Facebook"/>
+                                                        <inset key="contentEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <state key="normal" title="Войти через Facebook" image="facebook"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="3"/>
@@ -112,7 +114,7 @@
                                             <constraint firstAttribute="trailing" secondItem="wb4-B0-f5f" secondAttribute="trailing" constant="20" id="htj-o9-kKJ"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dwV-n1-nGC">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwV-n1-nGC">
                                         <rect key="frame" x="0.0" y="405" width="320" height="163"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kka-GP-Y2o">
@@ -174,6 +176,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="facebook" width="25" height="25"/>
         <image name="logo" width="129" height="79"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
