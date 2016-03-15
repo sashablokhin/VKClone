@@ -12,7 +12,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView: UITableView!
     
-    let loginCell = MATextFieldCell(type: MATextFieldType.Name, action: MATextFieldActionType.Next)
+    let loginCell = MATextFieldCell(type: MATextFieldType.Default, action: MATextFieldActionType.Next)
     let passwordCell = MATextFieldCell(type: MATextFieldType.Password, action: MATextFieldActionType.Done)
     var cells = []
     

@@ -24,6 +24,7 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
     let type: MATextFieldType
     let action: MATextFieldActionType
     var shouldAttemptFormat: Bool = true
+
     
     required init?(coder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -42,6 +43,7 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
         self.textField.delegate = self
         self.textField.frame = CGRectMake(fieldHorizontalPadding, fieldVeriticalPadding, CGRectGetWidth(self.contentView.frame) - 2 * fieldHorizontalPadding, CGRectGetHeight(self.contentView.frame) - (2 * fieldVeriticalPadding))
         self.textField.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        self.textField.tintColor = UIColor.blueColor()
         self.contentView.addSubview(self.textField)
         
         // configure the textfield based on the type and action
