@@ -13,6 +13,8 @@
 		AB3747331C933E3500C69E58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3747311C933E3500C69E58 /* LaunchScreen.storyboard */; };
 		AB37473B1C94868000C69E58 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB37473A1C94868000C69E58 /* FeedViewController.swift */; };
 		AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB37473C1C9486D100C69E58 /* AuthViewController.swift */; };
+		AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB37473E1C98157700C69E58 /* LoginViewController.swift */; };
+		AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3747411C98259700C69E58 /* MATextFieldCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		AB3747341C933E3500C69E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB37473A1C94868000C69E58 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		AB37473C1C9486D100C69E58 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		AB37473E1C98157700C69E58 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AB3747411C98259700C69E58 /* MATextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MATextFieldCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +62,23 @@
 			children = (
 				AB3747281C933E3500C69E58 /* AppDelegate.swift */,
 				AB37473C1C9486D100C69E58 /* AuthViewController.swift */,
+				AB37473E1C98157700C69E58 /* LoginViewController.swift */,
 				AB37473A1C94868000C69E58 /* FeedViewController.swift */,
+				AB3747401C98254D00C69E58 /* Supporting */,
 				AB37472C1C933E3500C69E58 /* Main.storyboard */,
 				AB37472F1C933E3500C69E58 /* Assets.xcassets */,
 				AB3747311C933E3500C69E58 /* LaunchScreen.storyboard */,
 				AB3747341C933E3500C69E58 /* Info.plist */,
 			);
 			path = VKClone;
+			sourceTree = "<group>";
+		};
+		AB3747401C98254D00C69E58 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				AB3747411C98259700C69E58 /* MATextFieldCell.swift */,
+			);
+			name = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */,
+				AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */,
 				AB37473B1C94868000C69E58 /* FeedViewController.swift in Sources */,
 				AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */,
 				AB3747291C933E3500C69E58 /* AppDelegate.swift in Sources */,
