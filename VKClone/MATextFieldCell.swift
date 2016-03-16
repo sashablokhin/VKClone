@@ -78,6 +78,7 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .EmailAddress
+            self.textField.clearButtonMode = .WhileEditing
         case .Address:
             self.textField.autocapitalizationType = .Words
             self.textField.autocorrectionType = .Yes
@@ -121,14 +122,14 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
             self.textField.returnKeyType = .Default
         case .Next:
             if requiresToolbar {
-                setupToolbarWithButtonTitle("Next")
+                setupToolbarWithButtonTitle("Далее")
             }
             else {
                 self.textField.returnKeyType = .Next
             }
         case .Done:
             if requiresToolbar {
-                setupToolbarWithButtonTitle("Done")
+                setupToolbarWithButtonTitle("Готово")
             }
             else {
                 self.textField.returnKeyType = .Done
@@ -157,7 +158,6 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
         self.actionBlock?()
         return false
     }
-    
     
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

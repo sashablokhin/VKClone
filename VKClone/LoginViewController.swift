@@ -12,8 +12,11 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView: UITableView!
     
-    let loginCell = MATextFieldCell(type: MATextFieldType.Default, action: MATextFieldActionType.Next)
+    var loginBarButton: UIBarButtonItem!
+    
+    let loginCell = MATextFieldCell(type: MATextFieldType.Email, action: MATextFieldActionType.Next)
     let passwordCell = MATextFieldCell(type: MATextFieldType.Password, action: MATextFieldActionType.Done)
+    
     var cells = []
     
     override func viewDidLoad() {
@@ -29,7 +32,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         navigationItem.titleView = imageView
         
-        let loginBarButton = UIBarButtonItem(title: "Войти", style: .Plain, target: self, action: "loginButtonPressed")
+        loginBarButton = UIBarButtonItem(title: "Войти", style: .Plain, target: self, action: "loginButtonPressed")
         loginBarButton.enabled = false
         
         navigationItem.rightBarButtonItem = loginBarButton
@@ -44,6 +47,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
+    @IBAction func forgetPasswordPressed(sender: UIButton) {
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,13 +73,35 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return
         }
         
+        loginCell.textField.addTarget(self, action: "loginTextChanged:", forControlEvents: UIControlEvents.EditingChanged)
+        
         passwordCell.textField.placeholder = "Пароль"
         passwordCell.actionBlock = {
             self.passwordCell.textField.resignFirstResponder()
             return
         }
         
-        cells = [loginCell, passwordCell];
+        passwordCell.textField.addTarget(self, action: "passwordTextChanged:", forControlEvents: UIControlEvents.EditingChanged)
+        
+        cells = [loginCell, passwordCell]
+    }
+    
+    
+    func loginTextChanged(textField: UITextField) {
+        if !textField.text!.isEmpty && !passwordCell.textField.text!.isEmpty {
+            loginBarButton.enabled = true
+        } else {
+            loginBarButton.enabled = false
+        }
+    }
+    
+    
+    func passwordTextChanged(textField: UITextField) {
+        if !textField.text!.isEmpty && !loginCell.textField.text!.isEmpty {
+            loginBarButton.enabled = true
+        } else {
+            loginBarButton.enabled = false
+        }
     }
     
     

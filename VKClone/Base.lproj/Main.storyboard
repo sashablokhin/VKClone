@@ -193,6 +193,18 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="09n-JZ-JNF">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pfY-44-lmQ">
+                                    <rect key="frame" x="0.0" y="175.5" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="-30" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Забыли пароль?">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="forgetPasswordPressed:" destination="WDW-vY-1U8" eventType="touchUpInside" id="0YS-3h-SfX"/>
+                                    </connections>
+                                </button>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="HM4-jK-Y1q" customClass="ABTableViewCell" customModule="VKClone">
                                         <rect key="frame" x="0.0" y="113.5" width="320" height="44"/>
@@ -212,7 +224,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="09n-JZ-JNF" firstAttribute="leading" secondItem="9ra-yf-KmN" secondAttribute="leading" id="0FH-mY-mek"/>
                             <constraint firstItem="drq-YW-ff1" firstAttribute="top" secondItem="09n-JZ-JNF" secondAttribute="bottom" id="G8O-X8-Pf1"/>
