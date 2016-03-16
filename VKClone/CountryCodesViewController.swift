@@ -8,9 +8,19 @@
 
 import UIKit
 
+class Country {
+    var name: String
+    var code: String
+    
+    init(countryName: String, callingCode: String) {
+        self.name = countryName
+        self.code = callingCode
+    }
+}
+
 class CountryCodesViewController: UITableViewController {
     
-    var countriesDictionary = [NSDictionary]()
+    var countriesArray = [Country]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +45,11 @@ class CountryCodesViewController: UITableViewController {
             
             if let data = data {
                 do {
-                    countriesDictionary = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
+                    let countriesDictionary = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
+                    
+                    parseCountries(countriesDictionary)
+                    
+                    countriesArray.sortInPlace { $0.name < $1.name }
                     
                     tableView.reloadData()
                 } catch {
@@ -47,11 +61,8 @@ class CountryCodesViewController: UITableViewController {
     }
     
     
-    func countryAtIndex(index: Int) -> (name: String, code: String) {
-        
-        if index < countriesDictionary.count {
-            let countryDict = countriesDictionary[index]
-            
+    func parseCountries(countriesDict: [NSDictionary]) {
+        for countryDict in countriesDict {
             let countryTranslations = countryDict.valueForKey("translations") as! NSDictionary
             
             let countryNameDict = countryTranslations.valueForKey("rus") as! NSDictionary
@@ -59,12 +70,9 @@ class CountryCodesViewController: UITableViewController {
             
             let callingCodeArray = countryDict.valueForKey("callingCode") as! [String]
             let callingCode = callingCodeArray[0]
-
-            return (countryName, callingCode)
             
+            countriesArray.append(Country(countryName: countryName, callingCode: callingCode))
         }
-        
-        return ("","")
     }
     
     
@@ -86,14 +94,14 @@ class CountryCodesViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return countriesDictionary.count
+        return countriesArray.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("countryCell", forIndexPath: indexPath)
 
-        cell.textLabel?.text = countryAtIndex(indexPath.row).name
+        cell.textLabel?.text = countriesArray[indexPath.row].name
 
         return cell
     }
