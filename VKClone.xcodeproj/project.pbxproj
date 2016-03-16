@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A6DC055F6C7B2F362AE5FBFE /* Pods_VKClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20695681D17468352F9D5034 /* Pods_VKClone.framework */; };
 		AB3747291C933E3500C69E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3747281C933E3500C69E58 /* AppDelegate.swift */; };
 		AB37472E1C933E3500C69E58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB37472C1C933E3500C69E58 /* Main.storyboard */; };
 		AB3747301C933E3500C69E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB37472F1C933E3500C69E58 /* Assets.xcassets */; };
@@ -15,9 +16,13 @@
 		AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB37473C1C9486D100C69E58 /* AuthViewController.swift */; };
 		AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB37473E1C98157700C69E58 /* LoginViewController.swift */; };
 		AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3747411C98259700C69E58 /* MATextFieldCell.swift */; };
+		AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20695681D17468352F9D5034 /* Pods_VKClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		653D83C079D8D1988A35734A /* Pods-VKClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKClone/Pods-VKClone.debug.xcconfig"; sourceTree = "<group>"; };
+		A0C359A306D8E8354923B450 /* Pods-VKClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClone.release.xcconfig"; path = "Pods/Target Support Files/Pods-VKClone/Pods-VKClone.release.xcconfig"; sourceTree = "<group>"; };
 		AB3747251C933E3400C69E58 /* VKClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3747281C933E3500C69E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB37472D1C933E3500C69E58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,6 +33,7 @@
 		AB37473C1C9486D100C69E58 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		AB37473E1C98157700C69E58 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB3747411C98259700C69E58 /* MATextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MATextFieldCell.swift; sourceTree = "<group>"; };
+		AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPswdViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +41,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6DC055F6C7B2F362AE5FBFE /* Pods_VKClone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3200E8C660841A7B9765F6B9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20695681D17468352F9D5034 /* Pods_VKClone.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AB37471C1C933E3400C69E58 = {
 			isa = PBXGroup;
 			children = (
 				AB3747271C933E3400C69E58 /* VKClone */,
 				AB3747261C933E3400C69E58 /* Products */,
+				E7C57F9B087E113AE8AC66EA /* Pods */,
+				3200E8C660841A7B9765F6B9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +80,7 @@
 				AB3747281C933E3500C69E58 /* AppDelegate.swift */,
 				AB37473C1C9486D100C69E58 /* AuthViewController.swift */,
 				AB37473E1C98157700C69E58 /* LoginViewController.swift */,
+				AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */,
 				AB37473A1C94868000C69E58 /* FeedViewController.swift */,
 				AB3747401C98254D00C69E58 /* Supporting */,
 				AB37472C1C933E3500C69E58 /* Main.storyboard */,
@@ -81,6 +99,15 @@
 			name = Supporting;
 			sourceTree = "<group>";
 		};
+		E7C57F9B087E113AE8AC66EA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				653D83C079D8D1988A35734A /* Pods-VKClone.debug.xcconfig */,
+				A0C359A306D8E8354923B450 /* Pods-VKClone.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -88,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB3747371C933E3500C69E58 /* Build configuration list for PBXNativeTarget "VKClone" */;
 			buildPhases = (
+				60166EA423C121E33393BCC9 /* Check Pods Manifest.lock */,
 				AB3747211C933E3400C69E58 /* Sources */,
 				AB3747221C933E3400C69E58 /* Frameworks */,
 				AB3747231C933E3400C69E58 /* Resources */,
+				515CBE53789A7B0D89848A99 /* Embed Pods Frameworks */,
+				0E1E761D763748F1C86287EA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -147,12 +177,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0E1E761D763748F1C86287EA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VKClone/Pods-VKClone-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		515CBE53789A7B0D89848A99 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VKClone/Pods-VKClone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60166EA423C121E33393BCC9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AB3747211C933E3400C69E58 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */,
+				AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */,
 				AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */,
 				AB37473B1C94868000C69E58 /* FeedViewController.swift in Sources */,
 				AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */,
@@ -265,6 +344,7 @@
 		};
 		AB3747381C933E3500C69E58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 653D83C079D8D1988A35734A /* Pods-VKClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VKClone/Info.plist;
@@ -276,6 +356,7 @@
 		};
 		AB3747391C933E3500C69E58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0C359A306D8E8354923B450 /* Pods-VKClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VKClone/Info.plist;

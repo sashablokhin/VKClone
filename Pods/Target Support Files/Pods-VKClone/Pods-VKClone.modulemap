@@ -1,0 +1,6 @@
+framework module Pods_VKClone {
+  umbrella header "Pods-VKClone-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SHSPhoneComponent
+//import CoreTelephony
 
 enum MATextFieldType: Int {
     case Default = 0, Name, Phone, Email, Address, StateAbbr, ZIP, Number, Decimal, Password, URL, NonEditable
@@ -16,7 +18,8 @@ enum MATextFieldActionType: Int {
 }
 
 class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
-    let textField: UITextField = UITextField(frame: CGRectZero)
+    var textField: UITextField!// = SHSPhoneTextField(frame: CGRectZero)
+    
     let fieldVeriticalPadding: CGFloat = 7.0
     let fieldHorizontalPadding: CGFloat = 10.0
     let toolbarHeight: CGFloat = 50.0
@@ -40,11 +43,6 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
         // basic configuration and creation of text field to fit within the bounds of the
         // cell and handle rotation nicely
         self.selectionStyle = .None
-        self.textField.delegate = self
-        self.textField.frame = CGRectMake(fieldHorizontalPadding, fieldVeriticalPadding, CGRectGetWidth(self.contentView.frame) - 2 * fieldHorizontalPadding, CGRectGetHeight(self.contentView.frame) - (2 * fieldVeriticalPadding))
-        self.textField.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        self.textField.tintColor = UIColor.blueColor()
-        self.contentView.addSubview(self.textField)
         
         // configure the textfield based on the type and action
         configureTextField()
@@ -61,57 +59,84 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
         // types require a toolbar to handle the next/done functionality
         switch (self.type) {
         case .Default:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .Sentences
             self.textField.autocorrectionType = .Yes
             self.textField.keyboardType = .Default
         case .Name:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .Words
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .Default
         case .Phone:
+            self.textField = SHSPhoneTextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .NumberPad
-            self.textField.addTarget(self, action: "formatPhoneNumber", forControlEvents: .EditingChanged)
-            requiresToolbar = true
+            
+            /*
+            // Setup the Network Info and create a CTCarrier object
+            let networkInfo = CTTelephonyNetworkInfo()
+            let carrier = networkInfo.subscriberCellularProvider
+            
+            // Get carrier name
+            let countryCode = carrier?.isoCountryCode
+            */
+            
+            let phoneTextField = self.textField as! SHSPhoneTextField
+            
+            phoneTextField.formatter.setDefaultOutputPattern("(###) ###-##-##")
+            phoneTextField.formatter.prefix = "+7 "
+            
         case .Email:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .EmailAddress
             self.textField.clearButtonMode = .WhileEditing
+            
+            
         case .Address:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .Words
             self.textField.autocorrectionType = .Yes
             self.textField.keyboardType = .Default
         case .StateAbbr:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .AllCharacters
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .Default
         case .ZIP:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .NumberPad
             requiresToolbar = true
         case .Number:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .NumberPad
             requiresToolbar = true
         case .Decimal:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .DecimalPad
             requiresToolbar = true
         case .Password:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = .Default
             self.textField.secureTextEntry = true
         case .URL:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
             self.textField.autocorrectionType = .No
             self.textField.keyboardType = UIKeyboardType.URL
         case .NonEditable:
+            self.textField = UITextField(frame: CGRectZero)
             self.textField.enabled = false
         }
         
@@ -135,6 +160,18 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
                 self.textField.returnKeyType = .Done
             }
         }
+        
+        
+        
+        
+        self.textField.delegate = self
+        self.textField.frame = CGRectMake(fieldHorizontalPadding, fieldVeriticalPadding, CGRectGetWidth(self.contentView.frame) - 2 * fieldHorizontalPadding, CGRectGetHeight(self.contentView.frame) - (2 * fieldVeriticalPadding))
+        
+        self.textField.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        self.textField.tintColor = UIColor.blueColor()
+        self.contentView.addSubview(self.textField)
+        
+        
     }
     
     func setupToolbarWithButtonTitle(buttonTitle: String) {
@@ -159,7 +196,7 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
         return false
     }
     
-    
+    /*
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         switch (self.type) {
             // the state abbreviation cell should only allow two characeters
@@ -187,11 +224,11 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
         default:
             return true
         }
-    }
+    }*/
     
     
     // MARK: - phone number formatting
-    
+    /*
     func formatPhoneNumber() {
         // this value is determined when textField shouldChangeCharactersInRange is called on a phone
         // number cell - if a user is deleting characters we don't want to try to format it, otherwise
@@ -229,6 +266,6 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
         }
         
         self.textField.text = formattedString as String
-    }
+    }*/
     
 }

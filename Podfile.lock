@@ -1,0 +1,10 @@
+PODS:
+  - SHSPhoneComponent (2.15)
+
+DEPENDENCIES:
+  - SHSPhoneComponent
+
+SPEC CHECKSUMS:
+  SHSPhoneComponent: 4cec0653a150ad63cbc52b0c8b29ce2d3c9c26f0
+
+COCOAPODS: 0.39.0
