@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Country {
+class Country: NSObject {
     var name: String
     var code: String
     
@@ -18,9 +18,18 @@ class Country {
     }
 }
 
+class Section {
+    var countries: [Country] = []
+    
+    func addCountry(country: Country) {
+        self.countries.append(country)
+    }
+}
+
 class CountryCodesViewController: UITableViewController {
     
-    var countriesArray = [Country]()
+    var sections = [String : Section?]()
+    var sortedSectionNames = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +58,6 @@ class CountryCodesViewController: UITableViewController {
                     
                     parseCountries(countriesDictionary)
                     
-                    countriesArray.sortInPlace { $0.name < $1.name }
-                    
                     tableView.reloadData()
                 } catch {
                     print("Json Error: \(error)")
@@ -71,8 +78,21 @@ class CountryCodesViewController: UITableViewController {
             let callingCodeArray = countryDict.valueForKey("callingCode") as! [String]
             let callingCode = callingCodeArray[0]
             
-            countriesArray.append(Country(countryName: countryName, callingCode: callingCode))
+            let country = Country(countryName: countryName, callingCode: callingCode)
+
+            let sectionName = String(countryName.characters.first!)
+            
+            if sections[sectionName] == nil {
+                let section = Section()
+                section.addCountry(country)
+                sections[sectionName] = section
+            } else {
+                let section = sections[sectionName]!
+                section!.addCountry(country)
+            }
         }
+        
+        sortedSectionNames = Array(sections.keys).sort()
     }
     
     
@@ -88,68 +108,43 @@ class CountryCodesViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return sections.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return countriesArray.count
+        
+        let sectionName = sortedSectionNames[section]
+        return sections[sectionName]!!.countries.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("countryCell", forIndexPath: indexPath)
-
-        cell.textLabel?.text = countriesArray[indexPath.row].name
+        
+        let sectionName = sortedSectionNames[indexPath.section]
+        let country = sections[sectionName]!!.countries[indexPath.row]
+        
+        
+        cell.textLabel?.text = country.name
+        cell.detailTextLabel?.text = "+" + country.code
 
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    // MARK: - Section headers
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+        return sortedSectionNames[section] 
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return sortedSectionNames
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return index
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
