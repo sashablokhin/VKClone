@@ -283,7 +283,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="BIp-9R-HZc" kind="presentation" id="Trk-nd-uPE"/>
+                                            <segue destination="BIp-9R-HZc" kind="presentation" identifier="showCountryCodes" id="Trk-nd-uPE"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="f14-WN-hOu">

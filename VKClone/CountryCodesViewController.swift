@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CountryCodesDelegate {
+    func countryCodeChanged(countryName: String, code: String)
+}
+
 class Country: NSObject {
     var name: String
     var code: String
@@ -27,6 +31,8 @@ class Section {
 }
 
 class CountryCodesViewController: UITableViewController {
+    
+    var countryCodeDelegate: CountryCodesDelegate?
     
     var sections = [String : Section?]()
     var sortedSectionNames = [String]()
@@ -104,6 +110,7 @@ class CountryCodesViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     // MARK: - Table view data source
 
@@ -112,7 +119,6 @@ class CountryCodesViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         let sectionName = sortedSectionNames[section]
         return sections[sectionName]!!.countries.count
     }
@@ -131,17 +137,27 @@ class CountryCodesViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let sectionName = sortedSectionNames[indexPath.section]
+        let country = sections[sectionName]!!.countries[indexPath.row]
+        
+        countryCodeDelegate?.countryCodeChanged(country.name, code: country.code)
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     // MARK: - Section headers
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
-        return sortedSectionNames[section] 
+        return sortedSectionNames[section]
     }
     
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return sortedSectionNames
     }
+    
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return index

@@ -9,13 +9,14 @@
 import UIKit
 import SHSPhoneComponent
 
-class ForgetPswdViewController: UIViewController {
+class ForgetPswdViewController: UIViewController, CountryCodesDelegate {
 
     @IBOutlet var tableView: UITableView!
     
     var nextBarButton: UIBarButtonItem!
     
     let phoneCell = MATextFieldCell(type: MATextFieldType.Phone, action: MATextFieldActionType.Done)
+    var phoneTextField: SHSPhoneTextField!
     
     var cells = []
     
@@ -33,12 +34,26 @@ class ForgetPswdViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = nextBarButton
         
-        (phoneCell.textField as! SHSPhoneTextField).textDidChangeBlock = phoneChange
+        phoneTextField = phoneCell.textField as! SHSPhoneTextField
+        
+        phoneTextField.textDidChangeBlock = phoneChange
+        phoneTextField.formatter.setDefaultOutputPattern("(###) ###-##-##")
+        phoneTextField.formatter.prefix = "+7 "
+        
         cells = [phoneCell]
     }
     
     func nextButtonPressed() {
         
+    }
+    
+    func countryCodeChanged(countryName: String, code: String) {
+        phoneTextField.formatter.prefix = "+\(code) "
+        
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        cell?.textLabel?.text = countryName
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -51,7 +66,7 @@ class ForgetPswdViewController: UIViewController {
     }
     
     func phoneChange(textField: UITextField!) -> Void {
-        if ((phoneCell.textField as! SHSPhoneTextField).phoneNumber() as NSString).length == 11 {
+        if phoneTextField.isValid() {
             nextBarButton.enabled = true
         } else {
             nextBarButton.enabled = false
@@ -77,6 +92,14 @@ class ForgetPswdViewController: UIViewController {
         }
         
         return cells[indexPath.row - 1] as! MATextFieldCell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCountryCodes" {
+            let navController = segue.destinationViewController as! UINavigationController
+            let vc = navController.viewControllers[0] as! CountryCodesViewController
+            vc.countryCodeDelegate = self
+        }
     }
 
 }

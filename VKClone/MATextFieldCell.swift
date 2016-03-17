@@ -83,11 +83,6 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
             let countryCode = carrier?.isoCountryCode
             */
             
-            let phoneTextField = self.textField as! SHSPhoneTextField
-            
-            phoneTextField.formatter.setDefaultOutputPattern("(###) ###-##-##")
-            phoneTextField.formatter.prefix = "+7 "
-            
         case .Email:
             self.textField = UITextField(frame: CGRectZero)
             self.textField.autocapitalizationType = .None
@@ -269,3 +264,12 @@ class MATextFieldCell: UITableViewCell, UITextFieldDelegate {
     }*/
     
 }
+
+
+extension SHSPhoneTextField {
+    func isValid() -> Bool {
+        return (self.phoneNumber() as NSString).length == 11
+    }
+}
+
+
