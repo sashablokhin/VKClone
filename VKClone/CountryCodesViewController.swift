@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CountryCodesDelegate {
-    func countryCodeChanged(countryName: String, code: String)
+@objc protocol CountryCodesDelegate {
+    optional func countryCodeChanged(countryName: String, code: String)
 }
 
 class Country: NSObject {
@@ -141,7 +141,7 @@ class CountryCodesViewController: UITableViewController {
         let sectionName = sortedSectionNames[indexPath.section]
         let country = sections[sectionName]!!.countries[indexPath.row]
         
-        countryCodeDelegate?.countryCodeChanged(country.name, code: country.code)
+        countryCodeDelegate?.countryCodeChanged!(country.name, code: country.code)
         
         dismissViewControllerAnimated(true, completion: nil)
     }

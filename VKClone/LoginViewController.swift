@@ -44,10 +44,23 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func loginButtonPressed() {
-        
+        self.pleaseWait()
+        self.view.userInteractionEnabled = false
+        loginBarButton.enabled = false
     }
     
     @IBAction func forgetPasswordPressed(sender: UIButton) {
+        
+    }
+    
+    // Back button pressed
+    
+    override func willMoveToParentViewController(parent: UIViewController?) {
+        super.willMoveToParentViewController(parent)
+        
+        if parent == nil{
+            self.clearAllNotice()
+        }
         
     }
 
@@ -78,6 +91,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         passwordCell.textField.placeholder = "Пароль"
         passwordCell.actionBlock = {
             self.passwordCell.textField.resignFirstResponder()
+            self.loginButtonPressed()
             return
         }
         

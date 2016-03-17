@@ -19,6 +19,7 @@
 		AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */; };
 		ABAE09091C999A1B00E8A4D6 /* CountryCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */; };
 		ABAE090B1C999E6500E8A4D6 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = ABAE090A1C999E6500E8A4D6 /* countries.json */; };
+		ABAE090D1C9AFD0000E8A4D6 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPswdViewController.swift; sourceTree = "<group>"; };
 		ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodesViewController.swift; sourceTree = "<group>"; };
 		ABAE090A1C999E6500E8A4D6 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				ABAE090A1C999E6500E8A4D6 /* countries.json */,
 				AB3747411C98259700C69E58 /* MATextFieldCell.swift */,
+				ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */,
 				AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */,
 				AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */,
+				ABAE090D1C9AFD0000E8A4D6 /* SwiftNotice.swift in Sources */,
 				ABAE09091C999A1B00E8A4D6 /* CountryCodesViewController.swift in Sources */,
 				AB37473B1C94868000C69E58 /* FeedViewController.swift in Sources */,
 				AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */,

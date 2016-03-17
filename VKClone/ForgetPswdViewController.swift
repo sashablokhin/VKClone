@@ -38,6 +38,10 @@ class ForgetPswdViewController: UIViewController, CountryCodesDelegate {
         
         phoneTextField.textDidChangeBlock = phoneChange
         phoneTextField.formatter.setDefaultOutputPattern("(###) ###-##-##")
+        
+        //phoneTextField.formatter.addOutputPattern("+# (###) ###-##-##", forRegExp: "^7[0-689]\\d*$")
+        //phoneTextField.formatter.addOutputPattern("+### (##) ###-###", forRegExp: "^374\\d*$")
+     
         phoneTextField.formatter.prefix = "+7 "
         
         cells = [phoneCell]
@@ -63,6 +67,11 @@ class ForgetPswdViewController: UIViewController, CountryCodesDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        phoneCell.textField.becomeFirstResponder()
     }
     
     func phoneChange(textField: UITextField!) -> Void {
