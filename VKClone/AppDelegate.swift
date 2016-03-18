@@ -20,6 +20,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
+        VKAPI.sharedInstance.userID = NSUserDefaults.standardUserDefaults().objectForKey("VKAccessUserID") as? String
+        
+        if let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("VKAccessToken") as? String {
+            if !accessToken.isEmpty {
+                
+                VKAPI.sharedInstance.accessToken = accessToken
+                
+                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                self.window!.makeKeyAndVisible()
+                
+                let mainViewController: FeedViewController = FeedViewController()
+                let navigationController: UINavigationController = UINavigationController(rootViewController: mainViewController)
+                self.window!.rootViewController = navigationController
+            }
+        }
+        
         return true
     }
     

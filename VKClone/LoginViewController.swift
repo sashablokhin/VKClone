@@ -74,6 +74,25 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.pleaseWait()
     }
     
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        showError(true)
+    }
+    
+    
+    func showError(popViewController: Bool) {
+        self.clearAllNotice()
+        self.noticeError("Ошибка", autoClear: true, autoClearTime: 3)
+        
+        if popViewController {
+            let delay = 3 * Double(NSEC_PER_SEC)
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue()) {
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+        }
+    }
+    
+    
     func webViewDidFinishLoad(webView: UIWebView) {
         self.clearAllNotice()
         
@@ -84,14 +103,28 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let accessToken = reqString.valueForTag("access_token=", close: "&")
                 let userID = reqString.valueForTag("user_id=", close: "")
                 
-                print(webView.request!.URL!.absoluteString)
-                print(accessToken)
-                print(userID)
+                if (!userID.isEmpty) {
+                    NSUserDefaults.standardUserDefaults().setObject(userID, forKey: "VKAccessUserID")
+                    
+                    VKAPI.sharedInstance.userID = userID
+                    
+                    if (!accessToken.isEmpty) {
+                        // Сохраняем дату получения токена. Параметр expires_in=86400 в ответе ВКонтакта, говорит сколько будет действовать токен.
+                        // В данном случае, это для примера, мы можем проверять позднее истек ли токен или нет
+                        NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "VKAccessToken")
+                        NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "VKAccessTokenDate")
+                        NSUserDefaults.standardUserDefaults().synchronize()
+                        
+                        VKAPI.sharedInstance.accessToken = accessToken
+                        
+                        // Авторизация прошла успешно
+                        performSegueWithIdentifier("showFeed", sender: self)
+                    }
+                }
 
             }
         }
     }
-    
     
     
     func loginButtonPressed() {
