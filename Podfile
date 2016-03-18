@@ -5,5 +5,6 @@
 
 target 'VKClone' do
 	pod 'SHSPhoneComponent'
+	pod "VK-ios-sdk" 
 end
 

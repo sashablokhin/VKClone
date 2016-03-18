@@ -20,6 +20,7 @@
 		ABAE09091C999A1B00E8A4D6 /* CountryCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */; };
 		ABAE090B1C999E6500E8A4D6 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = ABAE090A1C999E6500E8A4D6 /* countries.json */; };
 		ABAE090D1C9AFD0000E8A4D6 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */; };
+		ABAE09131C9C3CA000E8A4D6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodesViewController.swift; sourceTree = "<group>"; };
 		ABAE090A1C999E6500E8A4D6 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 		ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
+		ABAE090E1C9C2A4700E8A4D6 /* VKClone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKClone-Bridging-Header.h"; sourceTree = "<group>"; };
+		ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,7 @@
 				AB37472F1C933E3500C69E58 /* Assets.xcassets */,
 				AB3747311C933E3500C69E58 /* LaunchScreen.storyboard */,
 				AB3747341C933E3500C69E58 /* Info.plist */,
+				ABAE090E1C9C2A4700E8A4D6 /* VKClone-Bridging-Header.h */,
 			);
 			path = VKClone;
 			sourceTree = "<group>";
@@ -104,6 +108,7 @@
 				ABAE090A1C999E6500E8A4D6 /* countries.json */,
 				AB3747411C98259700C69E58 /* MATextFieldCell.swift */,
 				ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */,
+				ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */,
+				ABAE09131C9C3CA000E8A4D6 /* Extensions.swift in Sources */,
 				AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */,
 				AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */,
 				ABAE090D1C9AFD0000E8A4D6 /* SwiftNotice.swift in Sources */,
@@ -359,10 +365,13 @@
 			baseConfigurationReference = 653D83C079D8D1988A35734A /* Pods-VKClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VKClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jampps.VKClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VKClone/VKClone-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -371,10 +380,12 @@
 			baseConfigurationReference = A0C359A306D8E8354923B450 /* Pods-VKClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VKClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jampps.VKClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VKClone/VKClone-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import VK_ios_sdk
 
-class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate {
+    
+    var webView: UIWebView! // Авторизация через WebView
+    
+    private let clientID = "5361337"
     
     @IBOutlet var tableView: UITableView!
     
@@ -40,13 +45,54 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         generateCells()
         
         self.tableView.contentInset = UIEdgeInsetsMake(view.frame.height / 2 - loginCell.frame.height * 5, 0, 0, 0)
+        
+        let contentOffset: CGFloat = 64.0
+        
+        webView = UIWebView(frame: CGRectMake(0, contentOffset, view.frame.width, view.frame.height - contentOffset))
+        webView.delegate = self
+        
+        // Если закомментить то можно увидеть дизайн авторизации как в оригинальном приложении VKApp
+        view.addSubview(webView)
+        
+        getAccessTokenRequest()
     }
     
     
-    func loginButtonPressed() {
+    func getAccessTokenRequest() {
+        //self.pleaseWait()
+        
+        let authLink = "http://api.vk.com/oauth/authorize?client_id=\(clientID)&scope=wall,photos,friends,groups,offline&redirect_uri=http://api.vk.com/blank.html&display=mobile&response_type=token"
+        
+        if let url = NSURL(string: authLink) {
+            webView.loadRequest(NSURLRequest(URL: url))
+        }
+    }
+    
+    // MARK: - UIWebViewDelegate
+    
+    func webViewDidStartLoad(webView: UIWebView) {
         self.pleaseWait()
-        self.view.userInteractionEnabled = false
-        loginBarButton.enabled = false
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        self.clearAllNotice()
+        
+        if let req = webView.request?.URL?.absoluteString.rangeOfString("access_token") {
+            if !req.isEmpty {
+                
+                var reqString = webView.request!.URL!.absoluteString
+                let accessToken = reqString.valueForTag("access_token=", close: "&")
+
+            }
+        }
+    }
+    
+    
+    
+    func loginButtonPressed() {
+        //self.pleaseWait()
+        //self.view.userInteractionEnabled = false
+        //loginBarButton.enabled = false
     }
     
     @IBAction func forgetPasswordPressed(sender: UIButton) {

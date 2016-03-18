@@ -14,15 +14,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>VK-ios-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8A94E16A1CD241591F4ADE02C4713D32</key>
+		<key>3EA6F4A0B38C85BDFF123497C03AA45E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EDE8B258E08B5B49C70BA7DE3DEE8F28</key>
+		<key>47200AD6F484819ADA25CFE3EB303480</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A714FB5A720578333D1F9EA9AD44F007</key>
 		<dict>
 			<key>primary</key>
 			<true/>

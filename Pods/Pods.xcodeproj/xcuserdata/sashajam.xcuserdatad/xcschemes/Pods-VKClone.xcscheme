@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9340DCA9932C3E6934F7DE66'
+               BlueprintIdentifier = 'DE3A5C357DA6BBE944955A6F'
                BlueprintName = 'Pods-VKClone'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_VKClone.framework'>
