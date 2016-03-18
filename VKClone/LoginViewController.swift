@@ -59,8 +59,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func getAccessTokenRequest() {
-        //self.pleaseWait()
-        
         let authLink = "http://api.vk.com/oauth/authorize?client_id=\(clientID)&scope=wall,photos,friends,groups,offline&redirect_uri=http://api.vk.com/blank.html&display=mobile&response_type=token"
         
         if let url = NSURL(string: authLink) {
@@ -121,7 +119,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         performSegueWithIdentifier("showFeed", sender: self)
                     }
                 }
-
             }
         }
     }

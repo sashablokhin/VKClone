@@ -7,17 +7,33 @@
 //
 
 import UIKit
+import Alamofire
 
 class FeedViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        Alamofire.request(.GET, "https://api.vk.com/method/newsfeed.get", parameters: ["access_token": VKAPI.sharedInstance.accessToken!]).responseJSON { response in
+            
+            if let JSON = response.result.value {
+                
+                /*
+                let photoInfos = (JSON.valueForKey("photos") as! [NSDictionary]).filter({
+                    ($0["nsfw"] as! Bool) == false
+                }).map {
+                    PhotoInfo(id: $0["id"] as! Int, url: $0["image_url"] as! String)
+                }
+                
+                self.photos.addObjectsFromArray(photoInfos)
+                
+                self.collectionView!.reloadData()*/
+                
+                print(JSON)
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

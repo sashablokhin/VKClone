@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-VKClone.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3EA6F4A0B38C85BDFF123497C03AA45E</key>
+		<key>133F390A3910CD414FE885B85C32CF3C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>47200AD6F484819ADA25CFE3EB303480</key>
+		<key>39B54FDD5F8A930F81C7C328E7DBFF79</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A714FB5A720578333D1F9EA9AD44F007</key>
+		<key>6C01C544E48C75332E80E24AE913E19F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

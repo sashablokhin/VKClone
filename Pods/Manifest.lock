@@ -1,12 +1,15 @@
 PODS:
+  - Alamofire (3.2.1)
   - SHSPhoneComponent (2.15)
   - VK-ios-sdk (1.3.16)
 
 DEPENDENCIES:
+  - Alamofire (~> 3.0)
   - SHSPhoneComponent
   - VK-ios-sdk
 
 SPEC CHECKSUMS:
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   SHSPhoneComponent: 4cec0653a150ad63cbc52b0c8b29ce2d3c9c26f0
   VK-ios-sdk: 7804776d9947cf9b6f54a259fac589b9212156f1
 
