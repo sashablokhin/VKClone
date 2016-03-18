@@ -16,12 +16,17 @@ extension String {
         
         self = self.substringFromIndex(start!)
         
+        if close.isEmpty {
+            return self
+        }
+        
         let startClose = self.rangeOfString(close)?.startIndex
         let endClose = self.rangeOfString(close)?.endIndex
         
         let value = self.substringToIndex(startClose!)
         
         self = self.substringFromIndex(endClose!)
+
         
         return value
     }

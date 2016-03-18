@@ -7,19 +7,12 @@
 //
 
 import UIKit
-import VK_ios_sdk
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-/*
-    var accessToken: String?
-    var uid: String?
-    let clientID = "5361337"
-    let clientSecret = "BF4ocIfCrlxV40whoD8T"
-    */
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch
@@ -27,41 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
-        /*
-        let getToken = "https://oauth.vk.com/token?grant_type=password&client_id=\(clientID)&scope=wall&client_secret=\(clientSecret)&username=\(login)&password=\(password)"
-        
-        
-        let authorize = "http://oauth.vk.com/authorize?client_id=\(clientID)&display=mobile&callback=auth&redirect_uri=https://oauth.vk.com/blank.html&response_type=code&scope=wall,groups,friends&response_type=token"
-        
-        print(authorize)
-        */
-        
         return true
     }
-    
-    /*
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        VKSdk.processOpenURL(url, fromApplication: sourceApplication)
-        return true
-    }*/
-
-    /*
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        
-        VKSdk.processOpenURL(url, fromApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String)
-        
-        return true
-    }*/
-    
-    
-    /*
-    - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
-    [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
-    return YES;
-    }
-    */
-
-    
     
     
     func applicationWillResignActive(application: UIApplication) {

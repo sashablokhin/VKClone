@@ -82,6 +82,11 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 var reqString = webView.request!.URL!.absoluteString
                 let accessToken = reqString.valueForTag("access_token=", close: "&")
+                let userID = reqString.valueForTag("user_id=", close: "")
+                
+                print(webView.request!.URL!.absoluteString)
+                print(accessToken)
+                print(userID)
 
             }
         }
