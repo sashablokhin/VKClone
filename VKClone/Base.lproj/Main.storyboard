@@ -7,34 +7,48 @@
     </dependencies>
     <scenes>
         <!--Feed View Controller-->
-        <scene sceneID="nAZ-Ag-J2s">
+        <scene sceneID="QhN-kp-yoR">
             <objects>
-                <tableViewController id="tWe-SQ-QbN" customClass="FeedViewController" customModule="VKClone" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZPR-vF-Zhd">
+                <tableViewController storyboardIdentifier="FeedViewController" id="gdd-me-c5u" customClass="FeedViewController" customModule="VKClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="126" sectionHeaderHeight="28" sectionFooterHeight="28" id="ybf-y5-oTU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="aex-OV-DWG">
-                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="126" id="HcQ-h2-jxZ" customClass="PostCell" customModule="VKClone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="320" height="126"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aex-OV-DWG" id="rSz-TR-HYj">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HcQ-h2-jxZ" id="RXW-iz-W1D">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="125.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rC5-Xt-4CA">
+                                            <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="groupImageView" destination="rC5-Xt-4CA" id="gHC-vE-05P"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="tWe-SQ-QbN" id="bW3-ci-eYY"/>
-                            <outlet property="delegate" destination="tWe-SQ-QbN" id="P9I-2v-y49"/>
+                            <outlet property="dataSource" destination="gdd-me-c5u" id="L1h-Jw-ogV"/>
+                            <outlet property="delegate" destination="gdd-me-c5u" id="jsY-zX-PmM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ysl-k3-7B2"/>
+                    <navigationItem key="navigationItem" id="yFe-RP-feO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hU3-GM-noW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wsc-MP-z4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2381" y="401"/>
+            <point key="canvasLocation" x="2670" y="410"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="G04-fS-1b6">
@@ -238,7 +252,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="09n-JZ-JNF" id="ilT-xD-SFg"/>
-                        <segue destination="zKX-74-Xke" kind="presentation" identifier="showFeed" modalTransitionStyle="flipHorizontal" id="HZj-1p-1ei"/>
+                        <segue destination="o4D-4l-qqn" kind="presentation" identifier="showFeed" modalTransitionStyle="flipHorizontal" id="wTF-qi-pCf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYe-no-ddj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -409,22 +423,23 @@
             <point key="canvasLocation" x="2407" y="1133"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="qvm-SQ-8kc">
+        <scene sceneID="PaR-W6-kS1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zKX-74-Xke" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o4D-4l-qqn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="j7B-Gc-WjU">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cyS-3E-fcE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="tWe-SQ-QbN" kind="relationship" relationship="rootViewController" id="1YV-5Z-SFH"/>
+                        <segue destination="gdd-me-c5u" kind="relationship" relationship="rootViewController" id="R3o-wA-Jha"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GMe-wg-L7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sQh-1G-0Dp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1849" y="401"/>
+            <point key="canvasLocation" x="2058" y="410"/>
         </scene>
     </scenes>
     <resources>

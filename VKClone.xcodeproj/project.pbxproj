@@ -22,6 +22,7 @@
 		ABAE090D1C9AFD0000E8A4D6 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */; };
 		ABAE09131C9C3CA000E8A4D6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */; };
 		ABAE09151C9C4A8C00E8A4D6 /* VKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE09141C9C4A8C00E8A4D6 /* VKAPI.swift */; };
+		ABAE091B1CA1683800E8A4D6 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE091A1CA1683800E8A4D6 /* PostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		ABAE090E1C9C2A4700E8A4D6 /* VKClone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKClone-Bridging-Header.h"; sourceTree = "<group>"; };
 		ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ABAE09141C9C4A8C00E8A4D6 /* VKAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKAPI.swift; sourceTree = "<group>"; };
+		ABAE091A1CA1683800E8A4D6 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */,
 				ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */,
 				AB37473A1C94868000C69E58 /* FeedViewController.swift */,
+				ABAE091A1CA1683800E8A4D6 /* PostCell.swift */,
 				AB3747401C98254D00C69E58 /* Supporting */,
 				AB37472C1C933E3500C69E58 /* Main.storyboard */,
 				AB37472F1C933E3500C69E58 /* Assets.xcassets */,
@@ -256,6 +259,7 @@
 				ABAE090D1C9AFD0000E8A4D6 /* SwiftNotice.swift in Sources */,
 				ABAE09091C999A1B00E8A4D6 /* CountryCodesViewController.swift in Sources */,
 				AB37473B1C94868000C69E58 /* FeedViewController.swift in Sources */,
+				ABAE091B1CA1683800E8A4D6 /* PostCell.swift in Sources */,
 				AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */,
 				AB3747291C933E3500C69E58 /* AppDelegate.swift in Sources */,
 			);

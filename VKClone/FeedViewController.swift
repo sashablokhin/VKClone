@@ -10,12 +10,12 @@ import UIKit
 import Alamofire
 
 class FeedViewController: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        Alamofire.request(.GET, "https://api.vk.com/method/newsfeed.get", parameters: ["access_token": VKAPI.sharedInstance.accessToken!]).responseJSON { response in
+        
+        Alamofire.request(.GET, "https://api.vk.com/method/newsfeed.get", parameters: ["access_token": VKAPI.sharedInstance.accessToken!, "filters":"post"]).responseJSON { response in
             
             if let JSON = response.result.value {
                 
@@ -30,7 +30,15 @@ class FeedViewController: UITableViewController {
                 
                 self.collectionView!.reloadData()*/
                 
-                print(JSON)
+                if let response = JSON.valueForKey("response") as? NSDictionary {
+                    if let items = response.valueForKey("items") as? NSArray {
+                        print(items)
+                    }
+                }
+                
+                
+                
+                //print(JSON)
             }
         }
         
@@ -43,25 +51,21 @@ class FeedViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 20
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
+        
+        cell.groupImageView.image = UIImage(named: "logo")
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

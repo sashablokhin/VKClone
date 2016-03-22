@@ -30,8 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 self.window!.makeKeyAndVisible()
                 
-                let mainViewController: FeedViewController = FeedViewController()
-                let navigationController: UINavigationController = UINavigationController(rootViewController: mainViewController)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
+                
+                let navigationController = UINavigationController(rootViewController: mainViewController)
                 self.window!.rootViewController = navigationController
             }
         }
