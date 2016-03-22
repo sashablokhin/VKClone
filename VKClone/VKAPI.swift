@@ -15,3 +15,15 @@ class VKAPI {
     var accessToken: String?
     var userID: String?
 }
+
+
+
+class PostInfo: NSObject {
+    var image: String?
+    var title: String?
+    var time: String?
+    var text: String?
+    var likes: String?
+    var comments: String?
+    var reposts: String?    
+}

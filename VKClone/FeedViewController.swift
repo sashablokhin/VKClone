@@ -11,11 +11,13 @@ import Alamofire
 
 class FeedViewController: UITableViewController {
     
+    var posts = [PostInfo]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        Alamofire.request(.GET, "https://api.vk.com/method/newsfeed.get", parameters: ["access_token": VKAPI.sharedInstance.accessToken!, "filters":"post"]).responseJSON { response in
+        Alamofire.request(.GET, "https://api.vk.com/method/newsfeed.get", parameters: ["access_token": VKAPI.sharedInstance.accessToken!]).responseJSON { response in
             
             if let JSON = response.result.value {
                 
@@ -30,10 +32,62 @@ class FeedViewController: UITableViewController {
                 
                 self.collectionView!.reloadData()*/
                 
+                
+                
+                
                 if let response = JSON.valueForKey("response") as? NSDictionary {
-                    if let items = response.valueForKey("items") as? NSArray {
-                        print(items)
+                
+                    if let items = response.valueForKey("items") as? [NSDictionary] {
+                        
+                        //print(items)
+                        
+                        for item in items {
+                     
+                            let postInfo = PostInfo()
+                            
+                            
+                            let sourceID = item.valueForKey("source_id") as! Int
+                            let type = item.valueForKey("type") as! String
+                            //let postId = item.valueForKey("post_id") as! Int64
+                            let unixtime = item.valueForKey("date") as! NSTimeInterval
+                            
+                            let date = NSDate(timeIntervalSince1970: unixtime)
+                            
+                            let currentDate = NSDate()
+
+                            
+                            //print(date.compare(currentDate))
+                            
+                            
+                           // print(utcTimeZoneStr)
+                            //print(sourceID)
+                            //print(item)
+                            
+                            //print(groupsDict[abs(sourceID)])
+
+                            
+                            let groups = response.valueForKey("groups") as! [NSDictionary]
+                            
+                            for group in groups {
+                                
+                                let groupID = group.valueForKey("gid") as! Int
+                                if groupID == abs(sourceID) {
+                                    //print(group.valueForKey("name"))
+                                    //print(group)
+                                    
+                                    postInfo.title = group.valueForKey("name") as? String
+                                    postInfo.image = group.valueForKey("photo_medium") as? String
+                                }
+                                
+                                
+                            }
+                            
+                            self.posts.append(postInfo)
+                            self.tableView.reloadData()
+                        }
                     }
+                    
+
                 }
                 
                 
@@ -54,14 +108,27 @@ class FeedViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 20
+        return posts.count//20
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
         
-        cell.groupImageView.image = UIImage(named: "logo")
+        //cell.groupImageView.image = UIImage(named: "logo")
+        cell.postTitleLabel.text = posts[indexPath.row].title
+        //cell.textLabel?.text = posts[indexPath.row].title
+        
+        
+        let imageURL = posts[indexPath.row].image
+        
+        //print(imageURL)
+        
+        Alamofire.request(.GET, imageURL!).response { _, _, data, _ in
+            let image = UIImage(data: data!)
+            cell.groupImageView.image = image
+        }
+
 
         return cell
     }

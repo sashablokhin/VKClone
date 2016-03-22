@@ -11,6 +11,12 @@ import UIKit
 class PostCell: UITableViewCell {
 
     @IBOutlet var groupImageView: UIImageView!
+    @IBOutlet var postTitleLabel: UILabel!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.groupImageView.image = nil
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
