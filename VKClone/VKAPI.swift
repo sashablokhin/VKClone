@@ -23,6 +23,7 @@ class PostInfo: NSObject {
     var title: String?
     var time: String?
     var text: String?
+    var attachmentImage: String?
     var likes: String?
     var comments: String?
     var reposts: String?    

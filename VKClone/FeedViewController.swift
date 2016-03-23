@@ -50,7 +50,13 @@ class FeedViewController: UITableViewController {
                                         //print(attachments)
                                         
                                         for attachment in attachments {
-                                            print(attachment.allKeys)
+                                            //print(attachment.allKeys)
+                                            
+                                            if let photo = attachment.valueForKey("photo") {
+                                                print(photo)
+                                                
+                                                postInfo.attachmentImage = photo.valueForKey("src_big") as? String
+                                            }
                                         }
                                     }
                                     
@@ -112,11 +118,8 @@ class FeedViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
         
-        //cell.groupImageView.image = UIImage(named: "logo")
         cell.postTitleLabel.text = posts[indexPath.row].title
-        //cell.postTextLabel.text = posts[indexPath.row].text
-        
-        cell.postImageView.hidden = true
+        cell.timeLabel.text = "1 секунду назад"//posts[indexPath.row].text
         
         if let postText = posts[indexPath.row].text {
             let attrStr = try! NSAttributedString(
@@ -124,11 +127,21 @@ class FeedViewController: UITableViewController {
                 options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
                 documentAttributes: nil)
             cell.postTextLabel.attributedText = attrStr
-            cell.postTextLabel.font = UIFont.systemFontOfSize(16)
+            cell.postTextLabel.font = UIFont.systemFontOfSize(14)
         } else {
             cell.postTextLabel.text = ""
         }
         
+        if let attachmentImage = posts[indexPath.row].attachmentImage {
+            Alamofire.request(.GET, attachmentImage).response { _, _, data, _ in
+                let image = UIImage(data: data!)
+                cell.postImageView.image = image
+                
+                //cell.postImageView.hidden = false
+            }
+        } else {
+            cell.postImageView.hidden = true
+        }
         
         //cell.textLabel?.text = posts[indexPath.row].title
         

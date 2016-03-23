@@ -19,6 +19,7 @@ class PostCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.groupImageView.image = nil
+        self.postImageView.image = nil
     }
     
     override func awakeFromNib() {
