@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PostCell: UITableViewCell {
 
@@ -15,6 +16,12 @@ class PostCell: UITableViewCell {
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var postTextLabel: UILabel!
     @IBOutlet var postImageView: UIImageView!
+    
+    @IBOutlet var widthConstraint: NSLayoutConstraint!
+    @IBOutlet var heightConstraint: NSLayoutConstraint!
+    
+    var groupImageRequest: Alamofire.Request?
+    var postImageRequest: Alamofire.Request?
     
     override func prepareForReuse() {
         super.prepareForReuse()

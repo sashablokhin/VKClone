@@ -55,7 +55,14 @@ class FeedViewController: UITableViewController {
                                             if let photo = attachment.valueForKey("photo") {
                                                 print(photo)
                                                 
-                                                postInfo.attachmentImage = photo.valueForKey("src_big") as? String
+                                                let postImage = PostImage()
+                                                postImage.imageUrl = photo.valueForKey("src_big") as? String
+                                                postImage.width = photo.valueForKey("width") as! Int
+                                                postImage.height = photo.valueForKey("height") as! Int
+                                                
+                                                //print(postImage.width)
+                                                
+                                                postInfo.attachmentImage = postImage
                                             }
                                         }
                                     }
@@ -110,8 +117,7 @@ class FeedViewController: UITableViewController {
 
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return posts.count//20
+        return posts.count
     }
 
     
@@ -120,6 +126,9 @@ class FeedViewController: UITableViewController {
         
         cell.postTitleLabel.text = posts[indexPath.row].title
         cell.timeLabel.text = "1 секунду назад"//posts[indexPath.row].text
+        
+        cell.groupImageRequest?.cancel()
+        cell.postImageRequest?.cancel()
         
         if let postText = posts[indexPath.row].text {
             let attrStr = try! NSAttributedString(
@@ -133,22 +142,34 @@ class FeedViewController: UITableViewController {
         }
         
         if let attachmentImage = posts[indexPath.row].attachmentImage {
-            Alamofire.request(.GET, attachmentImage).response { _, _, data, _ in
-                let image = UIImage(data: data!)
-                cell.postImageView.image = image
-                
-                //cell.postImageView.hidden = false
+            
+            cell.postImageView.hidden = false
+            
+            let imageWidth = CGFloat(attachmentImage.width!)
+            let imageHeight = CGFloat(attachmentImage.height!)
+            
+            let screenWidth = UIScreen.mainScreen().bounds.width - 16
+            let ratio = imageHeight / imageWidth
+            
+            // Calculated Height for the picture
+            let newHeight = screenWidth * ratio
+            
+            cell.widthConstraint.constant = screenWidth 
+            cell.heightConstraint.constant = newHeight
+            
+            if let imageUrl = attachmentImage.imageUrl {
+                cell.groupImageRequest = Alamofire.request(.GET, imageUrl).response { _, _, data, _ in
+                    let image = UIImage(data: data!)
+                    cell.postImageView.image = image
+                }
             }
         } else {
             cell.postImageView.hidden = true
         }
         
-        //cell.textLabel?.text = posts[indexPath.row].title
-        
-        
         if let imageURL = posts[indexPath.row].image {
         
-            Alamofire.request(.GET, imageURL).response { _, _, data, _ in
+            cell.postImageRequest = Alamofire.request(.GET, imageURL).response { _, _, data, _ in
                 let image = UIImage(data: data!)
                 cell.groupImageView.image = image
             }

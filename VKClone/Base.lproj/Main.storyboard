@@ -76,10 +76,11 @@
                                                             </attributedString>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICc-nf-AnV">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICc-nf-AnV">
                                                             <rect key="frame" x="0.0" y="48" width="304" height="309"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="ICc-nf-AnV" secondAttribute="height" multiplier="304:309" id="p23-9b-GNy"/>
+                                                                <constraint firstAttribute="width" constant="304" id="clE-Jj-hGF"/>
+                                                                <constraint firstAttribute="height" constant="309" id="vzl-GW-kSt"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
@@ -111,10 +112,12 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="groupImageView" destination="rC5-Xt-4CA" id="gHC-vE-05P"/>
+                                    <outlet property="heightConstraint" destination="vzl-GW-kSt" id="bkQ-32-oBL"/>
                                     <outlet property="postImageView" destination="ICc-nf-AnV" id="Do8-vH-ppR"/>
                                     <outlet property="postTextLabel" destination="VMg-mT-utj" id="0gc-mZ-Nqf"/>
                                     <outlet property="postTitleLabel" destination="Nst-h1-tYn" id="6vL-ng-vPk"/>
                                     <outlet property="timeLabel" destination="EAe-dg-iAb" id="Gba-Gv-Uqm"/>
+                                    <outlet property="widthConstraint" destination="clE-Jj-hGF" id="ECM-Ju-A2F"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
