@@ -12,6 +12,9 @@ class PostCell: UITableViewCell {
 
     @IBOutlet var groupImageView: UIImageView!
     @IBOutlet var postTitleLabel: UILabel!
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var postTextLabel: UILabel!
+    @IBOutlet var postImageView: UIImageView!
     
     override func prepareForReuse() {
         super.prepareForReuse()

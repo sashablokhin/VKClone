@@ -12,85 +12,82 @@ import Alamofire
 class FeedViewController: UITableViewController {
     
     var posts = [PostInfo]()
+    var postIds = [NSNumber]()
+    
+    func configureTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 160.0
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureTableView()
         
         Alamofire.request(.GET, "https://api.vk.com/method/newsfeed.get", parameters: ["access_token": VKAPI.sharedInstance.accessToken!]).responseJSON { response in
             
             if let JSON = response.result.value {
                 
-                /*
-                let photoInfos = (JSON.valueForKey("photos") as! [NSDictionary]).filter({
-                    ($0["nsfw"] as! Bool) == false
-                }).map {
-                    PhotoInfo(id: $0["id"] as! Int, url: $0["image_url"] as! String)
-                }
-                
-                self.photos.addObjectsFromArray(photoInfos)
-                
-                self.collectionView!.reloadData()*/
-                
-                
-                
-                
                 if let response = JSON.valueForKey("response") as? NSDictionary {
                 
                     if let items = response.valueForKey("items") as? [NSDictionary] {
                         
-                        //print(items)
-                        
                         for item in items {
-                     
-                            let postInfo = PostInfo()
-                            
-                            
-                            let sourceID = item.valueForKey("source_id") as! Int
-                            let type = item.valueForKey("type") as! String
-                            //let postId = item.valueForKey("post_id") as! Int64
-                            let unixtime = item.valueForKey("date") as! NSTimeInterval
-                            
-                            let date = NSDate(timeIntervalSince1970: unixtime)
-                            
-                            let currentDate = NSDate()
-
-                            
-                            //print(date.compare(currentDate))
-                            
-                            
-                           // print(utcTimeZoneStr)
-                            //print(sourceID)
-                            //print(item)
-                            
-                            //print(groupsDict[abs(sourceID)])
-
-                            
-                            let groups = response.valueForKey("groups") as! [NSDictionary]
-                            
-                            for group in groups {
-                                
-                                let groupID = group.valueForKey("gid") as! Int
-                                if groupID == abs(sourceID) {
-                                    //print(group.valueForKey("name"))
-                                    //print(group)
+                            if let postId = item.valueForKey("post_id") {
+                                if !self.postIds.contains(postId as! NSNumber) {
                                     
-                                    postInfo.title = group.valueForKey("name") as? String
-                                    postInfo.image = group.valueForKey("photo_medium") as? String
+                                    let postInfo = PostInfo()
+                                    
+                                    let sourceID = item.valueForKey("source_id") as! Int
+                                    //let type = item.valueForKey("type")// as! String
+                                    if let text = item.valueForKey("text") as? String {
+                                        postInfo.text = text
+                                    }
+                                    
+                                    //print(item)
+                                    
+                                    if let attachments = item.valueForKey("attachments") as? [NSDictionary] {
+                                        //print(attachments)
+                                        
+                                        for attachment in attachments {
+                                            print(attachment.allKeys)
+                                        }
+                                    }
+                                    
+                                    
+                                    self.postIds.append(postId as! NSNumber)
+                                    
+                                    //print(postId)
+                                    
+                                    let unixtime = item.valueForKey("date") as! NSTimeInterval
+                                    
+                                    let date = NSDate(timeIntervalSince1970: unixtime)
+                                    
+                                    let currentDate = NSDate()
+                                    
+                                    
+                                    let groups = response.valueForKey("groups") as! [NSDictionary]
+                                    
+                                    var find = false
+                                    
+                                    for group in groups {
+                                        let groupID = group.valueForKey("gid") as! Int
+                                        if groupID == abs(sourceID) {
+                                            find = true
+                                            postInfo.title = group.valueForKey("name") as? String
+                                            postInfo.image = group.valueForKey("photo_medium") as? String
+                                        }
+                                    }
+                                    
+                                    if find {
+                                        self.posts.append(postInfo)
+                                        self.tableView.reloadData()
+                                    }
                                 }
-                                
-                                
                             }
-                            
-                            self.posts.append(postInfo)
-                            self.tableView.reloadData()
                         }
                     }
-                    
-
                 }
-                
-                
                 
                 //print(JSON)
             }
@@ -117,18 +114,32 @@ class FeedViewController: UITableViewController {
         
         //cell.groupImageView.image = UIImage(named: "logo")
         cell.postTitleLabel.text = posts[indexPath.row].title
+        //cell.postTextLabel.text = posts[indexPath.row].text
+        
+        cell.postImageView.hidden = true
+        
+        if let postText = posts[indexPath.row].text {
+            let attrStr = try! NSAttributedString(
+                data: postText.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+                options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                documentAttributes: nil)
+            cell.postTextLabel.attributedText = attrStr
+            cell.postTextLabel.font = UIFont.systemFontOfSize(16)
+        } else {
+            cell.postTextLabel.text = ""
+        }
+        
+        
         //cell.textLabel?.text = posts[indexPath.row].title
         
         
-        let imageURL = posts[indexPath.row].image
+        if let imageURL = posts[indexPath.row].image {
         
-        //print(imageURL)
-        
-        Alamofire.request(.GET, imageURL!).response { _, _, data, _ in
-            let image = UIImage(data: data!)
-            cell.groupImageView.image = image
+            Alamofire.request(.GET, imageURL).response { _, _, data, _ in
+                let image = UIImage(data: data!)
+                cell.groupImageView.image = image
+            }
         }
-
 
         return cell
     }
