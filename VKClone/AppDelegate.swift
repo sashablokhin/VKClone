@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let mainViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
                 
                 let navigationController = UINavigationController(rootViewController: mainViewController)
+                navigationController.navigationBar.barTintColor = UIColor(hexString: "#587DB6")
                 self.window!.rootViewController = navigationController
             }
         }

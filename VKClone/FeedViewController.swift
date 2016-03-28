@@ -53,12 +53,12 @@ class FeedViewController: UITableViewController {
                                             //print(attachment.allKeys)
                                             
                                             if let photo = attachment.valueForKey("photo") {
-                                                print(photo)
+                                                //print(photo)
                                                 
                                                 let postImage = PostImage()
                                                 postImage.imageUrl = photo.valueForKey("src_big") as? String
-                                                postImage.width = photo.valueForKey("width") as! Int
-                                                postImage.height = photo.valueForKey("height") as! Int
+                                                postImage.width = photo.valueForKey("width") as? Int
+                                                postImage.height = photo.valueForKey("height") as? Int
                                                 
                                                 //print(postImage.width)
                                                 
@@ -67,17 +67,12 @@ class FeedViewController: UITableViewController {
                                         }
                                     }
                                     
-                                    
                                     self.postIds.append(postId as! NSNumber)
                                     
-                                    //print(postId)
-                                    
                                     let unixtime = item.valueForKey("date") as! NSTimeInterval
-                                    
                                     let date = NSDate(timeIntervalSince1970: unixtime)
-                                    
-                                    let currentDate = NSDate()
-                                    
+
+                                    postInfo.time = NSDate().offsetFrom(date)
                                     
                                     let groups = response.valueForKey("groups") as! [NSDictionary]
                                     
@@ -112,6 +107,10 @@ class FeedViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 
     // MARK: - Table view data source
 
@@ -125,7 +124,7 @@ class FeedViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
         
         cell.postTitleLabel.text = posts[indexPath.row].title
-        cell.timeLabel.text = "1 секунду назад"//posts[indexPath.row].text
+        cell.timeLabel.text = posts[indexPath.row].time
         
         cell.groupImageRequest?.cancel()
         cell.postImageRequest?.cancel()

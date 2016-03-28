@@ -495,6 +495,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hwT-3h-p5I">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.34509803921568627" green="0.49019607843137253" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -514,6 +515,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cyS-3E-fcE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.34509803921568627" green="0.49019607843137253" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
