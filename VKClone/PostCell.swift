@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 
+
 class PostCell: UITableViewCell {
 
     @IBOutlet var groupImageView: UIImageView!
@@ -39,5 +40,4 @@ class PostCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

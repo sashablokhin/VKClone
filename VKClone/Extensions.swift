@@ -30,6 +30,16 @@ extension String {
         
         return value
     }
+    
+    func containsWords(words: [String]) -> Bool {
+        for word in words {
+            if self.containsString(word) {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
 
 

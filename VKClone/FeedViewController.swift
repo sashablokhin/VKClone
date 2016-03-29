@@ -130,12 +130,7 @@ class FeedViewController: UITableViewController {
         cell.postImageRequest?.cancel()
         
         if let postText = posts[indexPath.row].text {
-            let attrStr = try! NSAttributedString(
-                data: postText.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
-                options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-                documentAttributes: nil)
-            cell.postTextLabel.attributedText = attrStr
-            cell.postTextLabel.font = UIFont.systemFontOfSize(14)
+            cell.postTextLabel.text = postText 
         } else {
             cell.postTextLabel.text = ""
         }

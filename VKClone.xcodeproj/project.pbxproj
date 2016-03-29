@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A6DC055F6C7B2F362AE5FBFE /* Pods_VKClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20695681D17468352F9D5034 /* Pods_VKClone.framework */; };
+		AB0899531CA95C6A00CEBE5F /* ContextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0899521CA95C6A00CEBE5F /* ContextLabel.swift */; };
+		AB0899551CA9675100CEBE5F /* HtmlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0899541CA9675100CEBE5F /* HtmlLabel.swift */; };
 		AB3747291C933E3500C69E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3747281C933E3500C69E58 /* AppDelegate.swift */; };
 		AB37472E1C933E3500C69E58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB37472C1C933E3500C69E58 /* Main.storyboard */; };
 		AB3747301C933E3500C69E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB37472F1C933E3500C69E58 /* Assets.xcassets */; };
@@ -29,6 +31,8 @@
 		20695681D17468352F9D5034 /* Pods_VKClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		653D83C079D8D1988A35734A /* Pods-VKClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKClone/Pods-VKClone.debug.xcconfig"; sourceTree = "<group>"; };
 		A0C359A306D8E8354923B450 /* Pods-VKClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClone.release.xcconfig"; path = "Pods/Target Support Files/Pods-VKClone/Pods-VKClone.release.xcconfig"; sourceTree = "<group>"; };
+		AB0899521CA95C6A00CEBE5F /* ContextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextLabel.swift; sourceTree = "<group>"; };
+		AB0899541CA9675100CEBE5F /* HtmlLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlLabel.swift; sourceTree = "<group>"; };
 		AB3747251C933E3400C69E58 /* VKClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3747281C933E3500C69E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB37472D1C933E3500C69E58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 				ABAE090A1C999E6500E8A4D6 /* countries.json */,
 				AB3747411C98259700C69E58 /* MATextFieldCell.swift */,
 				ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */,
+				AB0899521CA95C6A00CEBE5F /* ContextLabel.swift */,
+				AB0899541CA9675100CEBE5F /* HtmlLabel.swift */,
 				ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */,
 				ABAE09141C9C4A8C00E8A4D6 /* VKAPI.swift */,
 			);
@@ -260,7 +266,9 @@
 				ABAE09091C999A1B00E8A4D6 /* CountryCodesViewController.swift in Sources */,
 				AB37473B1C94868000C69E58 /* FeedViewController.swift in Sources */,
 				ABAE091B1CA1683800E8A4D6 /* PostCell.swift in Sources */,
+				AB0899551CA9675100CEBE5F /* HtmlLabel.swift in Sources */,
 				AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */,
+				AB0899531CA95C6A00CEBE5F /* ContextLabel.swift in Sources */,
 				AB3747291C933E3500C69E58 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
