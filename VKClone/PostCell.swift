@@ -10,12 +10,12 @@ import UIKit
 import Alamofire
 
 
-class PostCell: UITableViewCell {
+class PostCell: UITableViewCell, HtmlLabelDelegate {
 
     @IBOutlet var groupImageView: UIImageView!
     @IBOutlet var postTitleLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var postTextLabel: UILabel!
+    @IBOutlet var postTextLabel: HtmlLabel!
     @IBOutlet var postImageView: UIImageView!
     
     @IBOutlet var widthConstraint: NSLayoutConstraint!
@@ -28,6 +28,8 @@ class PostCell: UITableViewCell {
         super.prepareForReuse()
         self.groupImageView.image = nil
         self.postImageView.image = nil
+        
+        postTextLabel.delegate = self
     }
     
     override func awakeFromNib() {
@@ -39,5 +41,11 @@ class PostCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    // MARK: - HtmlLabelDelegate
+
+    func htmlLabel(label: HtmlLabel, didTouchTo link: Link) {
+        print(link)
     }
 }

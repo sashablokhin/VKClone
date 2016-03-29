@@ -19,7 +19,20 @@ struct Link {
     var linkString: String
 }
 
+protocol HtmlLabelDelegate {
+    func htmlLabel(label: HtmlLabel, didTouchTo link: Link)
+}
+
+
+extension HtmlLabelDelegate {
+    func htmlLabel(label: HtmlLabel, didTouchTo link: Link) {
+        
+    }
+}
+
 class HtmlLabel: UILabel {
+    
+    var delegate: HtmlLabelDelegate?
     
     var links = [Link]()
     
@@ -66,15 +79,15 @@ class HtmlLabel: UILabel {
                 }
             }
             
-            if word.containsWords(["http", ".ru", ".com", ".net", "cc", "www"]) {
+            if word.containsWords(["http", ".ru", ".com", ".net", ".cc", "www"]) {
                 let linkRange = str.rangeOfString(word)
                 
                 if (linkRange.location != NSNotFound) {
                 
                     attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor(hexString: "#4F77B2"), range: linkRange)
                 
-                    let hashtag = Link(linkType: .WebLink, linkRange: linkRange, linkString: word)
-                    links.append(hashtag)
+                    let weblink = Link(linkType: .WebLink, linkRange: linkRange, linkString: word)
+                    links.append(weblink)
                     
                 }
             }
@@ -98,7 +111,11 @@ class HtmlLabel: UILabel {
     
     func tapToWord(gesture: UITapGestureRecognizer) {
         let touchPoint = gesture.locationOfTouch(0, inView: self)
-        getLinkAtLocation(touchPoint)
+        //print(getLinkAtLocation(touchPoint))
+        
+        if let link = getLinkAtLocation(touchPoint) {
+            delegate?.htmlLabel(self, didTouchTo: link)
+        }
     }
 
     
