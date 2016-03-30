@@ -28,13 +28,11 @@ class PostCell: UITableViewCell, HtmlLabelDelegate {
         super.prepareForReuse()
         self.groupImageView.image = nil
         self.postImageView.image = nil
-        
-        postTextLabel.delegate = self
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        postTextLabel.delegate = self
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

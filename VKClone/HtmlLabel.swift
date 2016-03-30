@@ -68,9 +68,9 @@ class HtmlLabel: UILabel {
         
         for word in words {
             if (word.containsString("#")) {
-                let hashtagRange = str.rangeOfString(word)
+                let hashtagRange = attrStr.mutableString.rangeOfString(word)
                 
-                if (hashtagRange.location != NSNotFound) {
+                if (hashtagRange.location != NSNotFound)  {
                 
                     attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor(hexString: "#4F77B2"), range: hashtagRange)
                 
@@ -80,7 +80,7 @@ class HtmlLabel: UILabel {
             }
             
             if word.containsWords(["http", ".ru", ".com", ".net", ".cc", "www"]) {
-                let linkRange = str.rangeOfString(word)
+                let linkRange = attrStr.mutableString.rangeOfString(word)
                 
                 if (linkRange.location != NSNotFound) {
                 
@@ -88,7 +88,6 @@ class HtmlLabel: UILabel {
                 
                     let weblink = Link(linkType: .WebLink, linkRange: linkRange, linkString: word)
                     links.append(weblink)
-                    
                 }
             }
         }
@@ -103,15 +102,14 @@ class HtmlLabel: UILabel {
         self.userInteractionEnabled = true
         
         if self.gestureRecognizers == nil {
-            let tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapToWord:"))
+            let tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapToLink:"))
             self.addGestureRecognizer(tapGesture)
         }
     }
     
     
-    func tapToWord(gesture: UITapGestureRecognizer) {
+    func tapToLink(gesture: UITapGestureRecognizer) {
         let touchPoint = gesture.locationOfTouch(0, inView: self)
-        //print(getLinkAtLocation(touchPoint))
         
         if let link = getLinkAtLocation(touchPoint) {
             delegate?.htmlLabel(self, didTouchTo: link)
@@ -122,36 +120,34 @@ class HtmlLabel: UILabel {
     private func getLinkAtLocation(location: CGPoint) -> Link? {
         
         let textContainer = NSTextContainer(size: self.frame.size)
+        
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = self.lineBreakMode
+        textContainer.maximumNumberOfLines = self.numberOfLines
+        
         let layoutManager = NSLayoutManager()
         let textStorage = NSTextStorage(attributedString: attributedText!)
         
-        textStorage.addLayoutManager(layoutManager)
         layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
         
-        var fractionOfDistance: CGFloat = 0.0
-        let characterIndex = layoutManager.characterIndexForPoint(location, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints: &fractionOfDistance)
+        let textBoundingBox = layoutManager.usedRectForTextContainer(textContainer)
+        let textContainerOffset = CGPointMake((CGRectGetWidth(self.bounds) - CGRectGetWidth(textBoundingBox)) * 0.5 - CGRectGetMinX(textBoundingBox),
+            (CGRectGetHeight(self.bounds) - CGRectGetHeight(textBoundingBox)) * 0.5 - CGRectGetMinY(textBoundingBox))
         
-        if characterIndex <= textStorage.length {
-            for link in links {
-                let rangeLocation = link.linkRange.location
-                let rangeLength = link.linkRange.length
-                
-                if rangeLocation <= characterIndex &&
-                    (rangeLocation + rangeLength - 1) >= characterIndex {
-                        
-                        let glyphRange = layoutManager.glyphRangeForCharacterRange(NSMakeRange(rangeLocation, rangeLength), actualCharacterRange: nil)
-                        let boundingRect = layoutManager.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer)
-                        
-                        if CGRectContainsPoint(boundingRect, location) {
-                            return link
-                        }
-                }
+        let locationOfTouchInTextContainer = CGPointMake(location.x - textContainerOffset.x, location.y - textContainerOffset.y);
+        let indexOfCharacter = layoutManager.characterIndexForPoint(locationOfTouchInTextContainer, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        for link in links {
+            if (NSLocationInRange(indexOfCharacter, link.linkRange)) {
+                return link
             }
         }
         
         return nil
     }
 }
+
 
 
 
