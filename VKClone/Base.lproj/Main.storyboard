@@ -63,19 +63,15 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bbz-Wq-Vjr">
                                                     <rect key="frame" x="0.0" y="60" width="304" height="357"/>
                                                     <subviews>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMg-mT-utj" customClass="HtmlLabel" customModule="VKClone" customModuleProvider="target">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlv-kL-h01" customClass="ReadMoreTextView" customModule="VKClone" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="304" height="43"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Text">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="tintColor" red="0.30980392159999998" green="0.46666666670000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                        </textView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICc-nf-AnV">
                                                             <rect key="frame" x="0.0" y="48" width="304" height="309"/>
                                                             <constraints>
@@ -85,22 +81,32 @@
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="VMg-mT-utj" firstAttribute="top" secondItem="bbz-Wq-Vjr" secondAttribute="top" id="0sf-GG-lKM"/>
+                                                        <constraint firstItem="Xlv-kL-h01" firstAttribute="leading" secondItem="bbz-Wq-Vjr" secondAttribute="leading" id="1CI-aM-fmV"/>
                                                         <constraint firstAttribute="trailing" secondItem="ICc-nf-AnV" secondAttribute="trailing" id="9zu-9N-MUC"/>
-                                                        <constraint firstAttribute="trailing" secondItem="VMg-mT-utj" secondAttribute="trailing" id="Cpc-Tx-5Lw"/>
                                                         <constraint firstAttribute="bottom" secondItem="ICc-nf-AnV" secondAttribute="bottom" id="N1s-Cn-nye"/>
-                                                        <constraint firstItem="VMg-mT-utj" firstAttribute="leading" secondItem="bbz-Wq-Vjr" secondAttribute="leading" id="RRB-qb-set"/>
+                                                        <constraint firstItem="Xlv-kL-h01" firstAttribute="top" secondItem="bbz-Wq-Vjr" secondAttribute="top" id="Qw6-GJ-D5Q"/>
                                                         <constraint firstItem="ICc-nf-AnV" firstAttribute="leading" secondItem="bbz-Wq-Vjr" secondAttribute="leading" id="brW-vu-qN1"/>
-                                                        <constraint firstItem="ICc-nf-AnV" firstAttribute="top" secondItem="VMg-mT-utj" secondAttribute="bottom" constant="10" id="ffz-R7-h1o"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Xlv-kL-h01" secondAttribute="trailing" id="pTa-Lx-VqD"/>
+                                                        <constraint firstItem="ICc-nf-AnV" firstAttribute="top" secondItem="Xlv-kL-h01" secondAttribute="bottom" id="zN7-BX-hdr"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="zN7-BX-hdr"/>
+                                                        </mask>
+                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="zpt-ap-e0u" firstAttribute="leading" secondItem="C31-GD-VJK" secondAttribute="leading" id="AIS-Du-BZc"/>
                                                 <constraint firstAttribute="trailing" secondItem="zpt-ap-e0u" secondAttribute="trailing" id="IMO-X2-dt2"/>
-                                                <constraint firstItem="bbz-Wq-Vjr" firstAttribute="top" secondItem="zpt-ap-e0u" secondAttribute="bottom" constant="10" id="h3T-dg-XSx"/>
+                                                <constraint firstItem="bbz-Wq-Vjr" firstAttribute="top" secondItem="zpt-ap-e0u" secondAttribute="bottom" id="h3T-dg-XSx"/>
                                                 <constraint firstAttribute="bottom" secondItem="bbz-Wq-Vjr" secondAttribute="bottom" id="mwO-5M-HXl"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="h3T-dg-XSx"/>
+                                                </mask>
+                                            </variation>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -114,7 +120,7 @@
                                     <outlet property="groupImageView" destination="rC5-Xt-4CA" id="gHC-vE-05P"/>
                                     <outlet property="heightConstraint" destination="vzl-GW-kSt" id="bkQ-32-oBL"/>
                                     <outlet property="postImageView" destination="ICc-nf-AnV" id="Do8-vH-ppR"/>
-                                    <outlet property="postTextLabel" destination="VMg-mT-utj" id="0gc-mZ-Nqf"/>
+                                    <outlet property="postTextView" destination="Xlv-kL-h01" id="n1J-Au-9tb"/>
                                     <outlet property="postTitleLabel" destination="Nst-h1-tYn" id="6vL-ng-vPk"/>
                                     <outlet property="timeLabel" destination="EAe-dg-iAb" id="Gba-Gv-Uqm"/>
                                     <outlet property="widthConstraint" destination="clE-Jj-hGF" id="ECM-Ju-A2F"/>

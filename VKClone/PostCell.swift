@@ -10,19 +10,22 @@ import UIKit
 import Alamofire
 
 
-class PostCell: UITableViewCell, HtmlLabelDelegate {
+class PostCell: UITableViewCell {
 
     @IBOutlet var groupImageView: UIImageView!
     @IBOutlet var postTitleLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var postTextLabel: HtmlLabel!
     @IBOutlet var postImageView: UIImageView!
+    
+    @IBOutlet var postTextView: ReadMoreTextView!
     
     @IBOutlet var widthConstraint: NSLayoutConstraint!
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     
     var groupImageRequest: Alamofire.Request?
     var postImageRequest: Alamofire.Request?
+    
+    var showMoreHandler: (() -> ())?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -32,18 +35,24 @@ class PostCell: UITableViewCell, HtmlLabelDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        postTextLabel.delegate = self
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    // MARK: - HtmlLabelDelegate
-
-    func htmlLabel(label: HtmlLabel, didTouchTo link: Link) {
-        print(link)
-    }
+    /*
+    @IBAction func showMoreButtonPressed(sender: AnyObject) {
+        if let handler = showMoreHandler {
+            handler()
+        }
+    }*/
 }
+
+
+
+
+
+
+
+
