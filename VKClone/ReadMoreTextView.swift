@@ -41,24 +41,17 @@ class Link: NSURL {
 }
 
 
-class ReadMoreTextView: UITextView, UITextViewDelegate {/*
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame, textContainer: textContainer)
-    }
+class ReadMoreTextView: UITextView, UITextViewDelegate {
     
-    convenience init(frame: CGRect) {
-        self.init(frame: frame, textContainer: nil)
-    }
-    
-    convenience init() {
-        self.init(frame: CGRectZero, textContainer: nil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }*/
     var attrStr: NSMutableAttributedString!
     var links = [Link]()
+    
+    var trimText = "Показать полностью..."
+    var shouldTrim = true
+    
+    var readMoreHandler: (() -> ())?
+    
+    private let readMoreLocation = 400
     
     override var text: String! {
         didSet {
@@ -96,7 +89,29 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {/*
             }
         }
         
-        self.attributedText = attrStr
+        if attrStr.length > readMoreLocation && shouldTrim {
+            if let shortAttrStr = attrStr.mutableCopy() as? NSMutableAttributedString {
+                
+                shortAttrStr.replaceCharactersInRange(NSMakeRange(readMoreLocation, attrStr.length - readMoreLocation), withAttributedString: getTrimAtrributedText())
+                
+                self.attributedText = shortAttrStr
+            }
+        } else {
+            self.attributedText = attrStr
+        }
+    }
+    
+    
+    func getTrimAtrributedText() -> NSAttributedString {
+        let trimStr = NSMutableAttributedString(string: "...\n\(trimText)")
+        trimStr.addAttribute(NSForegroundColorAttributeName, value: UIColor(hexString: "#4F77B2"), range: NSMakeRange(4, trimText.characters.count))
+        trimStr.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(14), range: NSMakeRange(4, trimText.characters.count))
+        
+        return trimStr
+    }
+    
+    func getReadMoreRange() -> NSRange {
+        return NSMakeRange(readMoreLocation, getTrimAtrributedText().length)
     }
     
     func getDefaultAttributedText(text: String) -> NSMutableAttributedString {
@@ -108,6 +123,7 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {/*
         self.font = UIFont.systemFontOfSize(14)
         self.editable = false
         self.scrollEnabled = false
+        self.userInteractionEnabled = true
         
         self.delegate = self
         
@@ -129,229 +145,56 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {/*
         
         return false
     }
-}
-
-
-
-
-
-/*
-@IBDesignable
-class ReadMoreTextView: UITextView {
     
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame, textContainer: textContainer)
-        scrollEnabled = false
-        editable = false
-    }
-    
-    convenience init(frame: CGRect) {
-        self.init(frame: frame, textContainer: nil)
-    }
-    
-    convenience init() {
-        self.init(frame: CGRectZero, textContainer: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        scrollEnabled = false
-        editable = false
-    }
-    
-    convenience init(maximumNumberOfLines: Int, trimText: NSString?, shouldTrim: Bool) {
-        self.init()
-        self.maximumNumberOfLines = maximumNumberOfLines
-        self.trimText = trimText
-        self.shouldTrim = shouldTrim
-    }
-    
-    convenience init(maximumNumberOfLines: Int, attributedTrimText: NSAttributedString?, shouldTrim: Bool) {
-        self.init()
-        self.maximumNumberOfLines = maximumNumberOfLines
-        self.attributedTrimText = attributedTrimText
-        self.shouldTrim = shouldTrim
-    }
-    
-    @IBInspectable
-    var maximumNumberOfLines: Int = 0 {
-        didSet { setNeedsLayout() }
-    }
-    
-    @IBInspectable
-    var trimText: NSString? {
-        didSet { setNeedsLayout() }
-    }
-    
-    var attributedTrimText: NSAttributedString? {
-        didSet { setNeedsLayout() }
-    }
-    
-    @IBInspectable
-    var shouldTrim: Bool = false {
-        didSet { setNeedsLayout() }
-    }
-    
-    var trimTextRangePadding: UIEdgeInsets = UIEdgeInsetsZero
-    var appendTrimTextPrefix: Bool = true
-    var trimTextPrefix: String = "..."
-    
-    private var originalText: String!
-    
-    override var text: String! {
-        didSet {
-            originalText = text
-            originalAttributedText = nil
-            if needsTrim() { updateText() }
-        }
-    }
-    
-    private var originalAttributedText: NSAttributedString!
-    
-    override var attributedText: NSAttributedString! {
-        didSet {
-            originalAttributedText = attributedText
-            originalText = nil
-            if needsTrim() { updateText() }
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        needsTrim() ? updateText() : resetText()
-    }
-    
-    func needsTrim() -> Bool {
-        return shouldTrim && _trimText != nil
-    }
-    
-    func updateText() {
-        textContainer.maximumNumberOfLines = maximumNumberOfLines
-        textContainer.size = CGSizeMake(bounds.size.width, CGFloat.max)
-        
-        let range = rangeToReplaceWithTrimText()
-        if range.location != NSNotFound {
-            let prefix = appendTrimTextPrefix ? trimTextPrefix : ""
-            
-            if let text = trimText?.mutableCopy() as? NSMutableString {
-                text.insertString("\(prefix) ", atIndex: 0)
-                textStorage.replaceCharactersInRange(range, withString: text as String) // !!!!!!!!!!!!!!!
-            }
-            else if let text = attributedTrimText?.mutableCopy() as? NSMutableAttributedString {
-                text.insertAttributedString(NSAttributedString(string: "\(prefix) "), atIndex: 0)
-                textStorage.replaceCharactersInRange(range, withAttributedString: text)
-            }
-        }
-        invalidateIntrinsicContentSize()
-    }
-    
-    func resetText() {
-        
-        print("!!!")
-        textContainer.maximumNumberOfLines = 0
-        if originalText != nil {
-            textStorage.replaceCharactersInRange(NSMakeRange(0, text!.characters.count/*countElements(text!)*/), withString: originalText)
-        }
-        else if originalAttributedText != nil {
-            textStorage.replaceCharactersInRange(NSMakeRange(0, text!.characters.count/*countElements(text!)*/), withAttributedString: originalAttributedText)
-        }
-        invalidateIntrinsicContentSize()
-    }
-    
-    override func intrinsicContentSize() -> CGSize {
-        textContainer.size = CGSizeMake(bounds.size.width, CGFloat.max)
-        var intrinsicContentSize = layoutManager.boundingRectForGlyphRange(layoutManager.glyphRangeForTextContainer(textContainer), inTextContainer: textContainer).size
-        intrinsicContentSize.width = UIViewNoIntrinsicMetric
-        intrinsicContentSize.height += (textContainerInset.top + textContainerInset.bottom)
-        return intrinsicContentSize
-    }
-    
+    /*
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         
-        if needsTrim() && pointInTrimTextRange(point) {
+        if shouldTrim && pointInTrimTextRange(point) {
+            self.attributedText = attrStr
             shouldTrim = false
-            maximumNumberOfLines = 0
+            
+            if let handler = readMoreHandler {
+                handler()
+            }
         }
         
         return super.hitTest(point, withEvent: event)
-    }
+    }*/
     
-    //MARK: Private methods
     
-    private var _trimText: NSString? {
-        get {
-            return trimText ?? attributedTrimText?.string
-        }
-    }
-    
-    private var _trimTextPrefixLength: Int {
-        get {
-            return appendTrimTextPrefix ? trimTextPrefix.characters.count/*countElements(trimTextPrefix)*/ + 1 : 1
-        }
-    }
-    
-    private var _originalTextLength: Int {
-        get {
-            if originalText != nil {
-                return originalText!.characters.count/*countElements(originalText!)*/
-            }
-            else  if originalAttributedText != nil {
-                return originalAttributedText!.length
-            }
-            return 0
-        }
-    }
-    
-    private func rangeToReplaceWithTrimText() -> NSRange {
-        let emptyRange = NSMakeRange(NSNotFound, 0)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("began")
         
-        var rangeToReplace = layoutManager.characterRangeThatFits(textContainer)
-        if NSMaxRange(rangeToReplace) == _originalTextLength {
-            rangeToReplace = emptyRange
-        }
-        else {
-            rangeToReplace.location = NSMaxRange(rangeToReplace) - _trimText!.length - _trimTextPrefixLength
-            if rangeToReplace.location < 0 {
-                rangeToReplace = emptyRange
-            }
-            else {
-                rangeToReplace.length = textStorage.length - rangeToReplace.location
+        if shouldTrim && pointInTrimTextRange(touches.first!.locationInView(self)) {
+            self.attributedText = attrStr
+            shouldTrim = false
+            
+            if let handler = readMoreHandler {
+                handler()
             }
         }
-        return rangeToReplace
+        
     }
     
-    private func trimTextRange() -> NSRange {
-        var trimTextRange = rangeToReplaceWithTrimText()
-        if trimTextRange.location != NSNotFound {
-            trimTextRange.length = _trimTextPrefixLength + _trimText!.length
-        }
-        return trimTextRange
+    
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        print("cancel")
     }
+    
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("moved")
+    }
+    
     
     private func pointInTrimTextRange(point: CGPoint) -> Bool {
         let offset = CGPointMake(textContainerInset.left, textContainerInset.top)
-        var boundingRect = layoutManager.boundingRectForCharacterRange(trimTextRange(), inTextContainer: textContainer, textContainerOffset: offset)
+        var boundingRect = layoutManager.boundingRectForCharacterRange(getReadMoreRange(), inTextContainer: textContainer, textContainerOffset: offset)
         boundingRect = CGRectOffset(boundingRect, textContainerInset.left, textContainerInset.top)
-        boundingRect = CGRectInset(boundingRect, -(trimTextRangePadding.left + trimTextRangePadding.right), -(trimTextRangePadding.top + trimTextRangePadding.bottom))
         return CGRectContainsPoint(boundingRect, point)
     }
 }
 
-//MARK: NSLayoutManager extension
 
-extension NSLayoutManager {
-    
-    func characterRangeThatFits(textContainer: NSTextContainer) -> NSRange {
-        var rangeThatFits = self.glyphRangeForTextContainer(textContainer)
-        rangeThatFits = self.characterRangeForGlyphRange(rangeThatFits, actualGlyphRange: nil)
-        return rangeThatFits
-    }
-    
-    func boundingRectForCharacterRange(range: NSRange, inTextContainer textContainer: NSTextContainer, textContainerOffset: CGPoint) -> CGRect {
-        let glyphRange = self.glyphRangeForCharacterRange(range, actualCharacterRange: nil)
-        let boundingRect = self.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer)
-        return boundingRect
-    }
-    
-}*/
+
+

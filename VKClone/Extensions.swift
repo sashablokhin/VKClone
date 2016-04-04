@@ -90,7 +90,14 @@ extension NSRange {
     func union(range:NSRange) -> NSRange {
         return NSUnionRange(self, range)
     }
-    
+}
+
+extension NSLayoutManager {
+    func boundingRectForCharacterRange(range: NSRange, inTextContainer textContainer: NSTextContainer, textContainerOffset: CGPoint) -> CGRect {
+        let glyphRange = self.glyphRangeForCharacterRange(range, actualCharacterRange: nil)
+        let boundingRect = self.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer)
+        return boundingRect
+    }
 }
 
 

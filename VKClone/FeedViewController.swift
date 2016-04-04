@@ -122,62 +122,6 @@ class FeedViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
-        /*
-        cell.postTitleLabel.text = posts[indexPath.row].title
-        cell.timeLabel.text = posts[indexPath.row].time
-        
-        cell.groupImageRequest?.cancel()
-        cell.postImageRequest?.cancel()
-        
-        if let postText = posts[indexPath.row].text {
-            cell.postTextLabel.text = postText 
-        } else {
-            cell.postTextLabel.text = ""
-        }
-        
-        if let attachmentImage = posts[indexPath.row].attachmentImage {
-            
-            cell.postImageView.hidden = false
-            
-            let imageWidth = CGFloat(attachmentImage.width!)
-            let imageHeight = CGFloat(attachmentImage.height!)
-            
-            let screenWidth = UIScreen.mainScreen().bounds.width - 16
-            let ratio = imageHeight / imageWidth
-            
-            // Calculated Height for the picture
-            let newHeight = screenWidth * ratio
-            
-            cell.widthConstraint.constant = screenWidth 
-            cell.heightConstraint.constant = newHeight
-            
-            if let imageUrl = attachmentImage.imageUrl {
-                cell.groupImageRequest = Alamofire.request(.GET, imageUrl).response { _, _, data, _ in
-                    let image = UIImage(data: data!)
-                    cell.postImageView.image = image
-                }
-            }
-        } else {
-            cell.postImageView.hidden = true
-        }
-        
-        if let imageURL = posts[indexPath.row].image {
-        
-            cell.postImageRequest = Alamofire.request(.GET, imageURL).response { _, _, data, _ in
-                let image = UIImage(data: data!)
-                cell.groupImageView.image = image
-            }
-        }
-
-        cell.showMoreHandler = { () -> () in            
-            tableView.beginUpdates()
-            cell.showMoreButton.hidden = true
-            cell.postTextLabel.numberOfLines = 0
-            tableView.endUpdates()
-        }
-        
-        return cell*/
-        
         
         cell.postTitleLabel.text = posts[indexPath.row].title
         cell.timeLabel.text = posts[indexPath.row].time
@@ -224,16 +168,13 @@ class FeedViewController: UITableViewController {
                 cell.groupImageView.image = image
             }
         }
-        /*
-        cell.showMoreHandler = { () -> () in
+        
+        cell.postTextView.readMoreHandler = { () -> () in
             tableView.beginUpdates()
-            cell.showMoreButton.hidden = true
-            cell.postTextLabel.numberOfLines = 0
             tableView.endUpdates()
-        }*/
+        }
         
         return cell
-        
     }
     
 

@@ -25,12 +25,11 @@ class PostCell: UITableViewCell {
     var groupImageRequest: Alamofire.Request?
     var postImageRequest: Alamofire.Request?
     
-    var showMoreHandler: (() -> ())?
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.groupImageView.image = nil
         self.postImageView.image = nil
+        self.postTextView.shouldTrim = true
     }
     
     override func awakeFromNib() {
@@ -40,13 +39,6 @@ class PostCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    /*
-    @IBAction func showMoreButtonPressed(sender: AnyObject) {
-        if let handler = showMoreHandler {
-            handler()
-        }
-    }*/
 }
 
 
