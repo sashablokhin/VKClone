@@ -41,12 +41,6 @@ class Link: NSURL {
 }
 
 
-struct LinkColors {    
-    static let defaultColor = UIColor(hexString: "#4F77B2")
-    static let highlightedColor = UIColor(hexString: "#4F77B2").colorWithAlphaComponent(0.8)
-}
-
-
 class ReadMoreTextView: UITextView, UITextViewDelegate {
     
     var attrStr: NSMutableAttributedString!
@@ -108,8 +102,8 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
     
     func getTrimAtrributedText() -> NSAttributedString {
         let trimStr = NSMutableAttributedString(string: "...\n\(trimText)")
-        trimStr.addAttribute(NSForegroundColorAttributeName, value: LinkColors.defaultColor, range: NSMakeRange(4, trimText.characters.count))
-        trimStr.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(14), range: NSMakeRange(0, trimStr.length))//trimText.characters.count))
+        trimStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.defaultLinkColor(), range: NSMakeRange(4, trimText.characters.count))
+        trimStr.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(14), range: NSMakeRange(0, trimStr.length))
         
         return trimStr
     }
@@ -161,7 +155,7 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if shouldTrim && pointInTrimTextRange(touches.first!.locationInView(self)) {
-            changeReadMoreColor(LinkColors.highlightedColor)
+            changeReadMoreColor(UIColor.highlightedLinkColor())
         }
         
         self.selectable = false
@@ -183,14 +177,14 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if shouldTrim && pointInTrimTextRange(touches.first!.locationInView(self)) {
-            changeReadMoreColor(LinkColors.defaultColor)
+            changeReadMoreColor(UIColor.defaultLinkColor())
         }
     }
     
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         if shouldTrim && pointInTrimTextRange(touches!.first!.locationInView(self)) {
-            changeReadMoreColor(LinkColors.defaultColor)
+            changeReadMoreColor(UIColor.defaultLinkColor())
         }
         
         self.selectable = true

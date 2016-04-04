@@ -28,7 +28,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zpt-ap-e0u">
                                                     <rect key="frame" x="0.0" y="0.0" width="304" height="50"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rC5-Xt-4CA">
+                                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rC5-Xt-4CA">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="hLX-AE-6Ug"/>
@@ -44,7 +44,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="FDa-qX-10H">
                                                             <rect key="frame" x="55" y="0.0" width="249" height="50"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nst-h1-tYn">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nst-h1-tYn">
                                                                     <rect key="frame" x="0.0" y="0.0" width="249" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                     <color key="textColor" red="0.30980392159999998" green="0.46666666670000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -118,6 +118,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="groupImageView" destination="rC5-Xt-4CA" id="gHC-vE-05P"/>
+                                    <outlet property="groupStackView" destination="zpt-ap-e0u" id="uVy-mU-afn"/>
                                     <outlet property="heightConstraint" destination="vzl-GW-kSt" id="bkQ-32-oBL"/>
                                     <outlet property="postImageView" destination="ICc-nf-AnV" id="Do8-vH-ppR"/>
                                     <outlet property="postTextView" destination="Xlv-kL-h01" id="n1J-Au-9tb"/>

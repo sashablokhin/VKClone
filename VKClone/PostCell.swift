@@ -9,11 +9,22 @@
 import UIKit
 import Alamofire
 
+class PostCell: UITableViewCell, GestureRecognizerDelegate {
 
-class PostCell: UITableViewCell {
-
+    @IBOutlet var groupStackView: UIStackView! {
+        didSet {
+            if oldValue == nil {
+                let tapGesture = GestureRecognizer()
+                tapGesture.gestureDelegate = self
+                groupStackView.addGestureRecognizer(tapGesture)
+                groupStackView.userInteractionEnabled = true
+            }
+        }
+    }
+    
     @IBOutlet var groupImageView: UIImageView!
     @IBOutlet var postTitleLabel: UILabel!
+    
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var postImageView: UIImageView!
     
@@ -39,7 +50,28 @@ class PostCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    // MARK: - GestureRecognizerDelegate
+    
+    func gestureRecognizer(gestureRecognizer: GestureRecognizer, touchesBegan touches: Set<UITouch>, withEvent event: UIEvent) {
+        postTitleLabel.textColor = UIColor.highlightedLinkColor()
+        groupImageView.alpha = 0.8
+    }
+    
+    func gestureRecognizer(gestureRecognizer: GestureRecognizer, touchesEnded touches: Set<UITouch>, withEvent event: UIEvent) {
+        print("go to group detail")
+        
+        postTitleLabel.textColor = UIColor.defaultLinkColor()
+        groupImageView.alpha = 1.0
+    }
+    
+    func gestureRecognizer(gestureRecognizer: GestureRecognizer, touchesMoved touches: Set<UITouch>, withEvent event: UIEvent) {
+        postTitleLabel.textColor = UIColor.defaultLinkColor()
+        groupImageView.alpha = 1.0
+    }
 }
+
+
 
 
 

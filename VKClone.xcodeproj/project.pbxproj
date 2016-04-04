@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A6DC055F6C7B2F362AE5FBFE /* Pods_VKClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20695681D17468352F9D5034 /* Pods_VKClone.framework */; };
+		AB056EE31CB28A05007B7E7A /* GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB056EE21CB28A05007B7E7A /* GestureRecognizer.swift */; };
 		AB3747291C933E3500C69E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3747281C933E3500C69E58 /* AppDelegate.swift */; };
 		AB37472E1C933E3500C69E58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB37472C1C933E3500C69E58 /* Main.storyboard */; };
 		AB3747301C933E3500C69E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB37472F1C933E3500C69E58 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		20695681D17468352F9D5034 /* Pods_VKClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		653D83C079D8D1988A35734A /* Pods-VKClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKClone/Pods-VKClone.debug.xcconfig"; sourceTree = "<group>"; };
 		A0C359A306D8E8354923B450 /* Pods-VKClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClone.release.xcconfig"; path = "Pods/Target Support Files/Pods-VKClone/Pods-VKClone.release.xcconfig"; sourceTree = "<group>"; };
+		AB056EE21CB28A05007B7E7A /* GestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureRecognizer.swift; sourceTree = "<group>"; };
 		AB3747251C933E3400C69E58 /* VKClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3747281C933E3500C69E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB37472D1C933E3500C69E58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				AB3747411C98259700C69E58 /* MATextFieldCell.swift */,
 				ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */,
 				AB900F511CAE56910013858E /* ReadMoreTextView.swift */,
+				AB056EE21CB28A05007B7E7A /* GestureRecognizer.swift */,
 				ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */,
 				ABAE09141C9C4A8C00E8A4D6 /* VKAPI.swift */,
 			);
@@ -266,6 +269,7 @@
 				ABAE091B1CA1683800E8A4D6 /* PostCell.swift in Sources */,
 				AB37473D1C9486D100C69E58 /* AuthViewController.swift in Sources */,
 				AB3747291C933E3500C69E58 /* AppDelegate.swift in Sources */,
+				AB056EE31CB28A05007B7E7A /* GestureRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

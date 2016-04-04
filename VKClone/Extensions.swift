@@ -119,6 +119,9 @@ extension UIColor {
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
+    
+    class func defaultLinkColor() -> UIColor {return UIColor(hexString: "#4F77B2")}
+    class func highlightedLinkColor() -> UIColor {return UIColor(hexString: "#4F77B2").colorWithAlphaComponent(0.8)}
 }
 
 
