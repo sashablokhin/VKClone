@@ -227,9 +227,32 @@ extension NSDate {
         
         return ""
     }
-    
-    
 }
+
+
+extension UINavigationBar {
+    func setContentAlpha(alpha: CGFloat) {
+        
+        let navItem = self.items?.first
+        
+        navItem?.titleView?.alpha = alpha
+        
+        setItemsAlpha(navItem?.leftBarButtonItems, alpha: alpha)
+        setItemsAlpha(navItem?.rightBarButtonItems, alpha: alpha)
+        
+    }
+    
+    private func setItemsAlpha(barButtonItems: [UIBarButtonItem]?, alpha: CGFloat) {
+        if let items = barButtonItems {
+            for item in items {
+                item.customView?.alpha = alpha
+            }
+        }
+    }
+}
+
+
+
 
 
 

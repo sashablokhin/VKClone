@@ -10,12 +10,31 @@ import UIKit
 import BTNavigationDropdownMenu
 import Alamofire
 
-class FeedViewController: UITableViewController {
+class FeedViewController: HiddenToolBarTableViewController {
     
     var posts = [PostInfo]()
     var postIds = [NSNumber]()
     
     let dropDownMenuItems = ["Новости", "Рекомендации", "Поиск", "Друзья", "Сообщества"]
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureNavigationBar()
+        configureTableView()
+        loadFeed()
+    }
+    
+    
+    
+    func configureNavigationBar() {
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        menuButton.setImage(UIImage(named: "menu.png"), forState: UIControlState.Normal)
+        //menuButton(self, action: "searchButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        //menuButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
+    }
     
     func configureTableView() {
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -39,17 +58,13 @@ class FeedViewController: UITableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureTableView()
-        
+    func loadFeed() {
         Alamofire.request(.GET, "https://api.vk.com/method/newsfeed.get", parameters: ["access_token": VKAPI.sharedInstance.accessToken!]).responseJSON { response in
             
             if let JSON = response.result.value {
                 
                 if let response = JSON.valueForKey("response") as? NSDictionary {
-                
+                    
                     if let items = response.valueForKey("items") as? [NSDictionary] {
                         
                         for item in items {
@@ -91,7 +106,7 @@ class FeedViewController: UITableViewController {
                                     
                                     let unixtime = item.valueForKey("date") as! NSTimeInterval
                                     let date = NSDate(timeIntervalSince1970: unixtime)
-
+                                    
                                     postInfo.time = NSDate().offsetFrom(date)
                                     
                                     let groups = response.valueForKey("groups") as! [NSDictionary]
@@ -120,7 +135,6 @@ class FeedViewController: UITableViewController {
                 //print(JSON)
             }
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

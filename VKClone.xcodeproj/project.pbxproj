@@ -18,6 +18,7 @@
 		AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB37473E1C98157700C69E58 /* LoginViewController.swift */; };
 		AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3747411C98259700C69E58 /* MATextFieldCell.swift */; };
 		AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */; };
+		AB8666491CB2AEE700EE053F /* HiddenToolBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8666481CB2AEE700EE053F /* HiddenToolBarTableViewController.swift */; };
 		AB900F521CAE56910013858E /* ReadMoreTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB900F511CAE56910013858E /* ReadMoreTextView.swift */; };
 		ABAE09091C999A1B00E8A4D6 /* CountryCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */; };
 		ABAE090B1C999E6500E8A4D6 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = ABAE090A1C999E6500E8A4D6 /* countries.json */; };
@@ -43,6 +44,7 @@
 		AB37473E1C98157700C69E58 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB3747411C98259700C69E58 /* MATextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MATextFieldCell.swift; sourceTree = "<group>"; };
 		AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPswdViewController.swift; sourceTree = "<group>"; };
+		AB8666481CB2AEE700EE053F /* HiddenToolBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenToolBarTableViewController.swift; sourceTree = "<group>"; };
 		AB900F511CAE56910013858E /* ReadMoreTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadMoreTextView.swift; sourceTree = "<group>"; };
 		ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodesViewController.swift; sourceTree = "<group>"; };
 		ABAE090A1C999E6500E8A4D6 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				ABAE090C1C9AFD0000E8A4D6 /* SwiftNotice.swift */,
 				AB900F511CAE56910013858E /* ReadMoreTextView.swift */,
 				AB056EE21CB28A05007B7E7A /* GestureRecognizer.swift */,
+				AB8666481CB2AEE700EE053F /* HiddenToolBarTableViewController.swift */,
 				ABAE09121C9C3CA000E8A4D6 /* Extensions.swift */,
 				ABAE09141C9C4A8C00E8A4D6 /* VKAPI.swift */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */,
+				AB8666491CB2AEE700EE053F /* HiddenToolBarTableViewController.swift in Sources */,
 				ABAE09131C9C3CA000E8A4D6 /* Extensions.swift in Sources */,
 				AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */,
 				ABAE09151C9C4A8C00E8A4D6 /* VKAPI.swift in Sources */,
