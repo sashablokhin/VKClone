@@ -41,6 +41,12 @@ class Link: NSURL {
 }
 
 
+struct LinkColors {    
+    static let defaultColor = UIColor(hexString: "#4F77B2")
+    static let highlightedColor = UIColor(hexString: "#4F77B2").colorWithAlphaComponent(0.8)
+}
+
+
 class ReadMoreTextView: UITextView, UITextViewDelegate {
     
     var attrStr: NSMutableAttributedString!
@@ -91,9 +97,7 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
         
         if attrStr.length > readMoreLocation && shouldTrim {
             if let shortAttrStr = attrStr.mutableCopy() as? NSMutableAttributedString {
-                
                 shortAttrStr.replaceCharactersInRange(NSMakeRange(readMoreLocation, attrStr.length - readMoreLocation), withAttributedString: getTrimAtrributedText())
-                
                 self.attributedText = shortAttrStr
             }
         } else {
@@ -104,14 +108,14 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
     
     func getTrimAtrributedText() -> NSAttributedString {
         let trimStr = NSMutableAttributedString(string: "...\n\(trimText)")
-        trimStr.addAttribute(NSForegroundColorAttributeName, value: UIColor(hexString: "#4F77B2"), range: NSMakeRange(4, trimText.characters.count))
-        trimStr.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(14), range: NSMakeRange(4, trimText.characters.count))
+        trimStr.addAttribute(NSForegroundColorAttributeName, value: LinkColors.defaultColor, range: NSMakeRange(4, trimText.characters.count))
+        trimStr.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(14), range: NSMakeRange(0, trimStr.length))//trimText.characters.count))
         
         return trimStr
     }
     
-    func getReadMoreRange() -> NSRange {
-        return NSMakeRange(readMoreLocation, getTrimAtrributedText().length)
+    func getReadMoreRange(leftOffset: Int = 0) -> NSRange {
+        return NSMakeRange(readMoreLocation + leftOffset, getTrimAtrributedText().length - leftOffset)
     }
     
     func getDefaultAttributedText(text: String) -> NSMutableAttributedString {
@@ -122,6 +126,7 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
         
         self.font = UIFont.systemFontOfSize(14)
         self.editable = false
+        self.selectable = false
         self.scrollEnabled = false
         self.userInteractionEnabled = true
         
@@ -146,25 +151,21 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
         return false
     }
     
-    /*
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        
-        if shouldTrim && pointInTrimTextRange(point) {
-            self.attributedText = attrStr
-            shouldTrim = false
-            
-            if let handler = readMoreHandler {
-                handler()
-            }
+    func changeReadMoreColor(color: UIColor) {
+        if let copyStr = self.attributedText.mutableCopy() as? NSMutableAttributedString {
+            copyStr.removeAttribute(NSForegroundColorAttributeName, range: getReadMoreRange(4))
+            copyStr.addAttribute(NSForegroundColorAttributeName, value: color, range: getReadMoreRange(4))
+            attributedText = copyStr
         }
-        
-        return super.hitTest(point, withEvent: event)
-    }*/
-    
+    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("began")
-        
+        if shouldTrim && pointInTrimTextRange(touches.first!.locationInView(self)) {
+            changeReadMoreColor(LinkColors.highlightedColor)
+        }
+    }
+
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if shouldTrim && pointInTrimTextRange(touches.first!.locationInView(self)) {
             self.attributedText = attrStr
             shouldTrim = false
@@ -173,19 +174,11 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
                 handler()
             }
         }
-        
     }
-    
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        print("cancel")
+        changeReadMoreColor(LinkColors.defaultColor)
     }
-    
-    
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("moved")
-    }
-    
     
     private func pointInTrimTextRange(point: CGPoint) -> Bool {
         let offset = CGPointMake(textContainerInset.left, textContainerInset.top)
