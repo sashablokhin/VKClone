@@ -126,7 +126,6 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
         
         self.font = UIFont.systemFontOfSize(14)
         self.editable = false
-        self.selectable = false
         self.scrollEnabled = false
         self.userInteractionEnabled = true
         
@@ -159,10 +158,13 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
         }
     }
     
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if shouldTrim && pointInTrimTextRange(touches.first!.locationInView(self)) {
             changeReadMoreColor(LinkColors.highlightedColor)
         }
+        
+        self.selectable = false
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -174,10 +176,24 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
                 handler()
             }
         }
+        
+        self.selectable = true
     }
     
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if shouldTrim && pointInTrimTextRange(touches.first!.locationInView(self)) {
+            changeReadMoreColor(LinkColors.defaultColor)
+        }
+    }
+    
+    
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        changeReadMoreColor(LinkColors.defaultColor)
+        if shouldTrim && pointInTrimTextRange(touches!.first!.locationInView(self)) {
+            changeReadMoreColor(LinkColors.defaultColor)
+        }
+        
+        self.selectable = true
     }
     
     private func pointInTrimTextRange(point: CGPoint) -> Bool {
