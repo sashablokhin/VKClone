@@ -133,7 +133,9 @@
                             <outlet property="delegate" destination="gdd-me-c5u" id="jsY-zX-PmM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yFe-RP-feO"/>
+                    <navigationItem key="navigationItem" id="yFe-RP-feO">
+                        <barButtonItem key="leftBarButtonItem" image="menu" style="plain" id="4OZ-OG-oeA"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsc-MP-z4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -537,6 +539,7 @@
     <resources>
         <image name="facebook" width="25" height="25"/>
         <image name="logo" width="129" height="79"/>
+        <image name="menu" width="25" height="25"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

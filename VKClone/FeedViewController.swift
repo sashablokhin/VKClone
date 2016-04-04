@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BTNavigationDropdownMenu
 import Alamofire
 
 class FeedViewController: UITableViewController {
@@ -14,9 +15,28 @@ class FeedViewController: UITableViewController {
     var posts = [PostInfo]()
     var postIds = [NSNumber]()
     
+    let dropDownMenuItems = ["Новости", "Рекомендации", "Поиск", "Друзья", "Сообщества"]
+    
     func configureTableView() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 160.0
+        
+        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: dropDownMenuItems.first!, items: dropDownMenuItems)
+        menuView.checkMarkImage = nil
+        menuView.cellHeight = 40
+        menuView.cellTextLabelFont = UIFont.systemFontOfSize(16)
+        menuView.cellBackgroundColor = UIColor.whiteColor()
+        menuView.cellTextLabelColor = UIColor.darkGrayColor()
+        menuView.cellSeparatorColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.4)
+        menuView.cellSelectionColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.4)
+        menuView.cellTextLabelAlignment = .Center
+        menuView.animationDuration = 0.4
+        
+        self.navigationItem.titleView = menuView
+        
+        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
+            print("Did select item at index: \(indexPath) name: \(self.dropDownMenuItems[indexPath])")
+        }
     }
     
     override func viewDidLoad() {

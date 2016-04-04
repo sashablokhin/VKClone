@@ -7,6 +7,7 @@ target 'VKClone' do
 	pod 'SHSPhoneComponent'
 	pod "VK-ios-sdk" 
 	pod 'Alamofire', '~> 3.0'
+	pod 'BTNavigationDropdownMenu'
 end
 
 

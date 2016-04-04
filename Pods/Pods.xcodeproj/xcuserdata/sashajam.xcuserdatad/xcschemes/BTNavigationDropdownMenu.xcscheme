@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D7D90158760BD556C62C15DF'
-               BlueprintName = 'VK-ios-sdk'
+               BlueprintIdentifier = 'A58687157895E349EB030D4E'
+               BlueprintName = 'BTNavigationDropdownMenu'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'VK_ios_sdk.framework'>
+               BuildableName = 'BTNavigationDropdownMenu.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

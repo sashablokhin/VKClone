@@ -85,11 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-VKClone/Alamofire.framework"
+  install_framework "Pods-VKClone/BTNavigationDropdownMenu.framework"
   install_framework "Pods-VKClone/SHSPhoneComponent.framework"
   install_framework "Pods-VKClone/VK_ios_sdk.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-VKClone/Alamofire.framework"
+  install_framework "Pods-VKClone/BTNavigationDropdownMenu.framework"
   install_framework "Pods-VKClone/SHSPhoneComponent.framework"
   install_framework "Pods-VKClone/VK_ios_sdk.framework"
 fi
