@@ -19,6 +19,7 @@
 		AB3747421C98259700C69E58 /* MATextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3747411C98259700C69E58 /* MATextFieldCell.swift */; };
 		AB4751A61C997128001B88B6 /* ForgetPswdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */; };
 		AB8666491CB2AEE700EE053F /* HiddenToolBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8666481CB2AEE700EE053F /* HiddenToolBarTableViewController.swift */; };
+		AB86664B1CB3F52B00EE053F /* LeftSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86664A1CB3F52B00EE053F /* LeftSideMenuViewController.swift */; };
 		AB900F521CAE56910013858E /* ReadMoreTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB900F511CAE56910013858E /* ReadMoreTextView.swift */; };
 		ABAE09091C999A1B00E8A4D6 /* CountryCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */; };
 		ABAE090B1C999E6500E8A4D6 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = ABAE090A1C999E6500E8A4D6 /* countries.json */; };
@@ -45,6 +46,7 @@
 		AB3747411C98259700C69E58 /* MATextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MATextFieldCell.swift; sourceTree = "<group>"; };
 		AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPswdViewController.swift; sourceTree = "<group>"; };
 		AB8666481CB2AEE700EE053F /* HiddenToolBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenToolBarTableViewController.swift; sourceTree = "<group>"; };
+		AB86664A1CB3F52B00EE053F /* LeftSideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuViewController.swift; sourceTree = "<group>"; };
 		AB900F511CAE56910013858E /* ReadMoreTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadMoreTextView.swift; sourceTree = "<group>"; };
 		ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodesViewController.swift; sourceTree = "<group>"; };
 		ABAE090A1C999E6500E8A4D6 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				AB4751A51C997128001B88B6 /* ForgetPswdViewController.swift */,
 				ABAE09081C999A1B00E8A4D6 /* CountryCodesViewController.swift */,
 				AB37473A1C94868000C69E58 /* FeedViewController.swift */,
+				AB86664A1CB3F52B00EE053F /* LeftSideMenuViewController.swift */,
 				ABAE091A1CA1683800E8A4D6 /* PostCell.swift */,
 				AB3747401C98254D00C69E58 /* Supporting */,
 				AB37472C1C933E3500C69E58 /* Main.storyboard */,
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB86664B1CB3F52B00EE053F /* LeftSideMenuViewController.swift in Sources */,
 				AB37473F1C98157700C69E58 /* LoginViewController.swift in Sources */,
 				AB8666491CB2AEE700EE053F /* HiddenToolBarTableViewController.swift in Sources */,
 				ABAE09131C9C3CA000E8A4D6 /* Extensions.swift in Sources */,

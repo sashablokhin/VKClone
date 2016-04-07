@@ -26,14 +26,16 @@ class FeedViewController: HiddenToolBarTableViewController {
     }
     
     
-    
     func configureNavigationBar() {
         let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         menuButton.setImage(UIImage(named: "menu.png"), forState: UIControlState.Normal)
-        //menuButton(self, action: "searchButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.addTarget(self, action: "menuButtonPressed", forControlEvents: .TouchUpInside)
         
-        //menuButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
+    }
+    
+    func menuButtonPressed() {
+        performSegueWithIdentifier("showLeftSideMenu", sender: self)
     }
     
     func configureTableView() {

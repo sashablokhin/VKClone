@@ -18,11 +18,11 @@ class Link: NSURL {
     var linkType: LinkType?
     var linkRange: NSRange?
     
-    init(link: String, type: LinkType, range: NSRange) {
+    init?(link: String, type: LinkType, range: NSRange) {
         switch type {
-        case .Hashtag:  super.init(string: "http://", relativeToURL: nil)!
+        case .Hashtag:  super.init(string: "http://", relativeToURL: nil)
             break
-        case .WebLink:  super.init(string: link.containsString("http") ? link : "http://" + link, relativeToURL: nil)!
+        case .WebLink:  super.init(string: link.containsString("http") ? link : "http://" + link, relativeToURL: nil)
             break
         }
         
@@ -74,17 +74,19 @@ class ReadMoreTextView: UITextView, UITextViewDelegate {
                 let linkRange = attrStr.mutableString.rangeOfString(word)
                 
                 if (linkRange.location != NSNotFound) {
-                    let weblink = Link(link: word, type: .WebLink, range: linkRange)
-                    links.append(weblink)
-                    attrStr.addAttribute(NSLinkAttributeName, value: weblink, range: linkRange)
+                    if let weblink = Link(link: word, type: .WebLink, range: linkRange) {
+                        links.append(weblink)
+                        attrStr.addAttribute(NSLinkAttributeName, value: weblink, range: linkRange)
+                    }
                 }
             } else if (word.containsString("#")) {
                 let hashtagRange = attrStr.mutableString.rangeOfString(word)
                 
                 if (hashtagRange.location != NSNotFound)  {
-                    let hashtag = Link(link: word, type: .Hashtag, range: hashtagRange)
-                    links.append(hashtag)
-                    attrStr.addAttribute(NSLinkAttributeName, value: hashtag, range: hashtagRange)
+                    if let hashtag = Link(link: word, type: .Hashtag, range: hashtagRange) {
+                        links.append(hashtag)
+                        attrStr.addAttribute(NSLinkAttributeName, value: hashtag, range: hashtagRange)
+                    }
                 }
             }
         }
