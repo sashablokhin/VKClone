@@ -12,6 +12,8 @@ import Alamofire
 
 class FeedViewController: HiddenToolBarTableViewController {
     
+    let transitionManager = MenuTransitionManager()
+    
     var posts = [PostInfo]()
     var postIds = [NSNumber]()
     
@@ -23,6 +25,8 @@ class FeedViewController: HiddenToolBarTableViewController {
         configureNavigationBar()
         configureTableView()
         loadFeed()
+        
+        transitionManager.sourceViewController = self
     }
     
     
@@ -36,6 +40,16 @@ class FeedViewController: HiddenToolBarTableViewController {
     
     func menuButtonPressed() {
         performSegueWithIdentifier("showLeftSideMenu", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // set transition delegate for our menu view controller
+        if segue.identifier == "showLeftSideMenu" {
+            let menu = segue.destinationViewController as! LeftSideMenuViewController
+            menu.transitioningDelegate = self.transitionManager
+            
+            self.transitionManager.menuViewController = menu
+        }
     }
     
     func configureTableView() {

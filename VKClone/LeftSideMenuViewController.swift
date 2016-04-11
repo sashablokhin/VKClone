@@ -13,9 +13,60 @@ struct MenuItem {
     var iconName: String
 }
 
-class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+enum SizeMode {
+    case Compact
+    case Full
+}
+
+class CustomSearchBar: UISearchBar {
     
-    var searchController: UISearchController!
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setShowsCancelButton(true, animated: true)
+    }
+    
+    func setSizeNode(mode: SizeMode) {
+        if mode == .Compact {
+            if let searchField = self.valueForKey("_searchField") as? UITextField {
+                searchField.frame.size.width = 260
+            }
+            
+            if let cancelButton = self.valueForKey("_cancelButton") as? UIButton {
+                cancelButton.alpha = 0
+                cancelButton.frame.origin.x += 20
+            }
+        } else if mode == .Full {
+            if let searchField = self.valueForKey("_searchField") as? UITextField {
+                searchField.frame.size.width = 240
+            }
+            
+            if let cancelButton = self.valueForKey("_cancelButton") as? UIButton {
+                cancelButton.alpha = 1
+                cancelButton.frame.origin.x -= 20
+            }
+        }
+    }
+}
+
+class CustomSearchController: UISearchController, UISearchBarDelegate  {
+    
+    lazy var _searchBar: CustomSearchBar = {
+        [unowned self] in
+        let result = CustomSearchBar()
+        result.delegate = self
+        
+        return result
+        }()
+    
+    override var searchBar: UISearchBar {
+        get {
+            return _searchBar
+        }
+    }
+}
+
+class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate {
+    var searchController: CustomSearchController!
     
     var shouldShowSearchResults = false
     
@@ -56,10 +107,12 @@ class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating
     }
     
     func configureSearchController() {
-        searchController = UISearchController(searchResultsController: nil)
+        searchController = CustomSearchController(searchResultsController: nil)
         
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
+        searchController.delegate = self
         searchController.searchBar.placeholder = "Поиск"
         searchController.searchBar.sizeToFit()
         searchController.searchBar.delegate = self
@@ -76,12 +129,28 @@ class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating
     }
     
     
+    // MARK: - UISearchControllerDelegate
+    
+    var searchBarBeginEditing: (() -> ())?
+    var searchBarEndEditing: (() -> ())?
+    
+    func didPresentSearchController(searchController: UISearchController) {
+        if let handler = searchBarBeginEditing {
+            handler()
+        }
+    }
+    
+    func willDismissSearchController(searchController: UISearchController) {
+        if let handler = searchBarEndEditing {
+            handler()
+        }
+    }
     
     // MARK: - UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        let searchString = searchController.searchBar.text
-        /*
+        /*let searchString = searchController.searchBar.text
+        
         filteredArray = menuItems.filter({ (country) -> Bool in
             let countryText: NSString = country
             
@@ -103,6 +172,7 @@ class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating
         
         tableView.reloadData()
     }
+    
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         shouldShowSearchResults = false
