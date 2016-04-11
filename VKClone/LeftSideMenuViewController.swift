@@ -22,31 +22,43 @@ class CustomSearchBar: UISearchBar {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setShowsCancelButton(true, animated: true)
+        setShowsCancelButton(true, animated: false)
+        setSizeMode(.Compact)
     }
     
-    func setSizeNode(mode: SizeMode) {
+    override func drawRect(rect: CGRect) {
+        setSizeMode(.Compact)
+        
+        if let cancelButton = self.valueForKey("_cancelButton") as? UIButton {
+            cancelButton.setTitle("Отменить", forState: .Normal)
+        }
+        
+        super.drawRect(rect)
+    }
+    
+    func setSizeMode(mode: SizeMode) {
         if mode == .Compact {
-            if let searchField = self.valueForKey("_searchField") as? UITextField {
-                searchField.frame.size.width = 260
-            }
-            
             if let cancelButton = self.valueForKey("_cancelButton") as? UIButton {
                 cancelButton.alpha = 0
                 cancelButton.frame.origin.x += 20
+                
+                if let searchField = self.valueForKey("_searchField") as? UITextField {
+                    searchField.frame.size.width = 260
+                }
             }
         } else if mode == .Full {
-            if let searchField = self.valueForKey("_searchField") as? UITextField {
-                searchField.frame.size.width = 240
-            }
-            
             if let cancelButton = self.valueForKey("_cancelButton") as? UIButton {
                 cancelButton.alpha = 1
-                cancelButton.frame.origin.x -= 20
+                cancelButton.frame.origin.x -= 40
+                
+                if let searchField = self.valueForKey("_searchField") as? UITextField {
+                    searchField.frame.size.width = cancelButton.frame.origin.x - 20
+                }
             }
         }
     }
 }
+
 
 class CustomSearchController: UISearchController, UISearchBarDelegate  {
     
@@ -64,6 +76,7 @@ class CustomSearchController: UISearchController, UISearchBarDelegate  {
         }
     }
 }
+
 
 class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate {
     var searchController: CustomSearchController!

@@ -31,19 +31,19 @@ class MenuTransitionManager: UIPercentDrivenInteractiveTransition, UIViewControl
             menuViewController.searchBarBeginEditing = {() -> () in
                 let searchBar = self.menuViewController.searchController.searchBar as! CustomSearchBar
                 
-                UIView.animateWithDuration(0.3) { () -> Void in
+                UIView.animateKeyframesWithDuration(0.4, delay: 0.0, options: .LayoutSubviews, animations: { () -> Void in
                     self.snapshot?.transform = self.offStage(UIScreen.mainScreen().bounds.width)
-                    searchBar.setSizeNode(.Full)
-                }
+                    searchBar.setSizeMode(.Full)
+                    }, completion: nil)
             }
             
             menuViewController.searchBarEndEditing = {() -> () in
                 let searchBar = self.menuViewController.searchController.searchBar as! CustomSearchBar
                 
-                UIView.animateWithDuration(0.3) { () -> Void in
+                UIView.animateKeyframesWithDuration(0.4, delay: 0.0, options: .LayoutSubviews, animations: { () -> Void in
                     self.snapshot?.transform = self.offStage(275)
-                    searchBar.setSizeNode(.Compact)
-                }
+                    searchBar.setSizeMode(.Compact)
+                    }, completion: nil)
             }
         }
     }
