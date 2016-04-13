@@ -252,6 +252,25 @@ extension UINavigationBar {
 }
 
 
+extension UIImage {
+    func resizeImage(toSize size:CGSize) -> UIImage {
+        
+        let scale = CGFloat(max(size.width/self.size.width,
+            size.height/self.size.height))
+        let width:CGFloat  = self.size.width * scale
+        let height:CGFloat = self.size.height * scale;
+        
+        let rr:CGRect = CGRectMake( 0, 0, width, height);
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0);
+        self.drawInRect(rr)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        return newImage
+    }
+}
+
+
 
 
 

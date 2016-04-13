@@ -8,10 +8,19 @@
 
 import UIKit
 
-struct MenuItem {
+
+class MenuItem {
     var name: String
     var iconName: String
+    var buttonName: String?
+    
+    init(name: String, iconName: String, buttonName: String? = nil) {
+        self.name = name
+        self.iconName = iconName
+        self.buttonName = buttonName
+    }
 }
+
 
 enum SizeMode {
     case Compact
@@ -35,6 +44,7 @@ class CustomSearchBar: UISearchBar {
         
         super.drawRect(rect)
     }
+    
     
     func setSizeMode(mode: SizeMode) {
         if mode == .Compact {
@@ -83,18 +93,7 @@ class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating
     
     var shouldShowSearchResults = false
     
-    var menuItems = [
-        MenuItem(name: "Новости", iconName: "m_feed"),
-        MenuItem(name: "Ответы", iconName: "m_answers"),
-        MenuItem(name: "Сообщения", iconName: "m_messages"),
-        MenuItem(name: "Друзья", iconName: "m_friends"),
-        MenuItem(name: "Группы", iconName: "m_groups"),
-        MenuItem(name: "Фотографии", iconName: "m_photos"),
-        MenuItem(name: "Видеозаписи", iconName: "m_videos"),
-        MenuItem(name: "Игры", iconName: "m_games"),
-        MenuItem(name: "Закладки", iconName: "m_favorite"),
-        MenuItem(name: "Настройки", iconName: "m_settings")
-    ]
+    var menuItems = [MenuItem]() 
     
     var currentMenuIndexPath: NSIndexPath?
     
@@ -107,7 +106,15 @@ class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating
         tableView.tableFooterView = UIView(frame:CGRectZero)
         tableView.backgroundView = UIView()
         
+        configureMenuItems()
         configureSearchController()
+    }
+    
+    deinit{
+        if let superView = searchController.view.superview
+        {
+            superView.removeFromSuperview()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -117,6 +124,22 @@ class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
+    }
+    
+    func configureMenuItems() {
+        menuItems = [
+            MenuItem(name: "Александр", iconName: "navlogo", buttonName: "m_photo"),
+            MenuItem(name: "Новости", iconName: "m_feed"),
+            MenuItem(name: "Ответы", iconName: "m_answers"),
+            MenuItem(name: "Сообщения", iconName: "m_messages"),
+            MenuItem(name: "Друзья", iconName: "m_friends"),
+            MenuItem(name: "Группы", iconName: "m_groups"),
+            MenuItem(name: "Фотографии", iconName: "m_photos"),
+            MenuItem(name: "Видеозаписи", iconName: "m_videos"),
+            MenuItem(name: "Игры", iconName: "m_games"),
+            MenuItem(name: "Закладки", iconName: "m_favorite"),
+            MenuItem(name: "Настройки", iconName: "m_settings")
+        ]
     }
     
     func configureSearchController() {
@@ -232,14 +255,26 @@ class LeftSideMenuViewController: UITableViewController, UISearchResultsUpdating
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("sideMenuCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("sideMenuCell", forIndexPath: indexPath) as! MenuCell
         
         if shouldShowSearchResults {
-            cell.textLabel?.text = filteredArray[indexPath.row]
+            //cell.textLabel?.text = filteredArray[indexPath.row]
         }
         else {
             cell.textLabel?.text = menuItems[indexPath.row].name
-            cell.imageView?.image = UIImage(named: menuItems[indexPath.row].iconName)
+            cell.textLabel?.textColor = UIColor(hexString: "#EAEBEC")
+
+            if indexPath.row == 0 {
+                cell.imageView?.image = UIImage(named: menuItems[indexPath.row].iconName)?.resizeImage(toSize: CGSizeMake(25, 25))
+                cell.imageView?.clipsToBounds = true
+                cell.imageView?.layer.cornerRadius = 10
+                
+                cell.menuButton.setImage(UIImage(named: menuItems[indexPath.row].buttonName!), forState: .Normal)
+                cell.buttonConstraint.constant = 225
+                
+            } else {
+                cell.imageView?.image = UIImage(named: menuItems[indexPath.row].iconName)
+            }
         }
         
         return cell
